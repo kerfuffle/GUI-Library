@@ -1,0 +1,81 @@
+package net.kerfuffle.textTest;
+
+import org.lwjgl.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
+
+import java.nio.*;
+
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
+
+import static org.lwjgl.glfw.GLFW.*;
+
+
+public class HelloWorld extends DavisGUI{
+
+	public HelloWorld()
+	{
+		super("Hey", 1000, 700);
+	}
+	
+	public static void main(String args[])
+	{
+		new HelloWorld().run();
+	}
+
+	private float x = 0, y = 0, w = 0.7f, h = 1f;
+	
+	public void childLoop() 
+	{
+		glColor3f(0, 1, 0);
+		
+		if (keyDown(GLFW_KEY_W))
+		{
+			y+=0.05;
+		}
+		if (keyDown(GLFW_KEY_A))
+		{
+			x-=0.05;
+		}
+		if (keyDown(GLFW_KEY_S))
+		{
+			y-=0.05;
+		}
+		if (keyDown(GLFW_KEY_D))
+		{
+			x+=0.05;
+		}
+		
+		
+		quad(x,y,w,h);
+		
+		/*(glColor3f(1, 1, 0);
+		glBegin(GL_QUADS);
+		glVertex2f(50f, 50f);
+		glVertex2f(50f+50f, 50f);
+		glVertex2f(50f+50f, 50f+50f);
+		glVertex2f(50f, 50f+50f);
+		glEnd();*/
+		
+	}
+	
+	private void quad(float x, float y, float w, float h)
+	{
+		/*x*=(10/7);
+		y*=(10/7);
+		w*=(10/7);
+		h*=(10/7);*/
+		
+		glBegin(GL_QUADS);
+		glVertex2f(x, y);
+		glVertex2f(x+w, y);
+		glVertex2f(x+w, y+h);
+		glVertex2f(x, y+h);
+		glEnd();
+	}
+}
