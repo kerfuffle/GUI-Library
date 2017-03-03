@@ -133,7 +133,7 @@ public abstract class DavisGUI {
 		glfwShowWindow(window);
 		
 		
-		//glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_VERTEX_ARRAY);
 	}
 
 	private void loop()

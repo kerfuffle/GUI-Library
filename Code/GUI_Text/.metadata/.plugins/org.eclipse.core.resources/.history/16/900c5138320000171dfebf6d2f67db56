@@ -57,7 +57,6 @@ public class HelloWorld extends DavisGUI{
 		
 		glDrawArrays(GL_QUADS, 0, t*4);
 		
-		
 		/*(glColor3f(1, 1, 0);
 		glBegin(GL_QUADS);
 		glVertex2f(50f, 50f);

@@ -36,10 +36,6 @@ public class HelloWorld extends DavisGUI{
 		ByteBuffer charBuffer = BufferUtils.createByteBuffer(2 * 270);
 		
 		t = stb_easy_font_print(0,0,"hi",null,charBuffer);
-		
-
-		//glEnableClientState(GL_VERTEX_ARRAY);
-		//glVertexPointer(2, GL_FLOAT, 16, charBuffer);
 	}
 	
 	public static void main(String args[])
@@ -53,10 +49,9 @@ public class HelloWorld extends DavisGUI{
 	{
 		glColor3f(0, 1, 0);
 	
-		//p.update();
+		p.update();
 		
 		glDrawArrays(GL_QUADS, 0, t*4);
-		
 		
 		/*(glColor3f(1, 1, 0);
 		glBegin(GL_QUADS);

@@ -67,7 +67,7 @@ public abstract class DavisGUI {
 		this.windowHeight = (int) windowHeight;
 		
 		aspectRatio = windowHeight/windowWidth;
-		//System.out.print(aspectRatio);
+		System.out.print(aspectRatio);
 	}
 	
 	public void run() {
@@ -131,9 +131,6 @@ public abstract class DavisGUI {
 		glfwSwapInterval(1);
 
 		glfwShowWindow(window);
-		
-		
-		//glEnableClientState(GL_VERTEX_ARRAY);
 	}
 
 	private void loop()
