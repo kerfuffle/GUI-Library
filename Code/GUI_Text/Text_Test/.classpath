@@ -73,7 +73,7 @@
 	<classpathentry kind="lib" path="libs/lwjgl-stb-javadoc.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-stb-natives-windows.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-stb-sources.jar"/>
-	<classpathentry kind="lib" path="libs/lwjgl-stb.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-stb.jar" sourcepath="libs/lwjgl-stb-sources.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-tinyfd-javadoc.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-tinyfd-natives-windows.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-tinyfd-sources.jar"/>
@@ -85,7 +85,7 @@
 	<classpathentry kind="lib" path="libs/lwjgl-xxhash-natives-windows.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-xxhash-sources.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-xxhash.jar"/>
-	<classpathentry kind="lib" path="libs/lwjgl.jar">
+	<classpathentry kind="lib" path="libs/lwjgl.jar" sourcepath="libs/lwjgl-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Text_Test/libs"/>
 		</attributes>

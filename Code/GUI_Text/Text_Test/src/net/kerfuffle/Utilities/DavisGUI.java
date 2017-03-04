@@ -31,6 +31,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
@@ -47,12 +48,15 @@ import static org.lwjgl.stb.STBEasyFont.stb_easy_font_print;
 
 public abstract class DavisGUI {
 
+	public static ArrayList<DavisObject> DavisObjects = new ArrayList<DavisObject>();
+	
 	protected static long window;
 
 	protected String windowName;
 	protected int windowWidth, windowHeight;
 	public static float aspectRatio;
 	public static float scale = 1;
+	
 	
 	
 	public DavisGUI(String windowName, float windowWidth, float windowHeight)
@@ -131,14 +135,9 @@ public abstract class DavisGUI {
 		//glEnableClientState(GL_VERTEX_ARRAY);
 	}
 
-	int t;
 	private void loop()
 	{
 		GL.createCapabilities();
-		
-		ByteBuffer charBuffer = BufferUtils.createByteBuffer(2 * 270);
-		
-		t = stb_easy_font_print(0,0,"hi",null,charBuffer);
 		
 		childInit();
 		
@@ -149,34 +148,23 @@ public abstract class DavisGUI {
 		glLoadIdentity();
 		glEnable(GL_DEPTH_TEST);
 		glOrtho(-windowWidth/2, windowWidth/2, -windowHeight/2, windowHeight/2, 0, 100);
-		glVertexPointer(2, GL_FLOAT, 16, charBuffer);
+		
 		
 		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
 			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 			
-			//glPushMatrix();
-			
-			float scaleFactor = 1.0f + 0 * 0.25f;
-			
-			//glScalef(scaleFactor, scaleFactor, 1f);
-			// Scroll
-			//glTranslatef(4.0f, 4.0f - 0 * 12, 0f);
-
-			//p.update();
-			
-			glColor3f(1,1,1);
-			glDrawArrays(GL_QUADS, 0, t*4);
-			
-			
-	
-			
-			//glPopMatrix();	
-			
 			childLoop();
 	
 			glfwSwapBuffers(window); 
+		}
+		
+		
+		// Allow all DavisObjects to carry out things needed before close
+		for (DavisObject d : DavisObjects)
+		{
+			d.finish();
 		}
 	}
 	
@@ -192,7 +180,7 @@ public abstract class DavisGUI {
 	
 	
 	
-	/***************************** Global Funtions *****************************************************************************************************/
+	/***************************** Global Functions *****************************************************************************************************/
 	
 	
 	
@@ -209,12 +197,12 @@ public abstract class DavisGUI {
 	
 	public static void quad(float x, float y, float w, float h)
 	{
-		w*=aspectRatio;
-		
-		x*=scale;
-		y*=scale;
-		w*=scale;
-		h*=scale;
+//		w*=aspectRatio;
+//		
+//		x*=scale;
+//		y*=scale;
+//		w*=scale;
+//		h*=scale;
 		
 		glBegin(GL_QUADS);
 		glVertex2f(x, y);

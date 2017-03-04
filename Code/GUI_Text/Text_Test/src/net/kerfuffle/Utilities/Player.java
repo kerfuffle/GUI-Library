@@ -25,6 +25,7 @@ public class Player {
 		
 		if (cameraFollow)
 		{
+			glTranslatef(-(box.x+(box.w/2)), -(box.y+(box.h/2)), 0);
 			camera = new Camera2D(box.x+(box.w/2),box.y+(box.h/2), speed, keyUp, keyDown, keyLeft, keyRight);
 		}
 	}
@@ -39,6 +40,10 @@ public class Player {
 	public void setZoomKeys(int zIn, int zOut)
 	{
 		camera.setZoomKeys(zIn, zOut);
+	}
+	public void setZoomSpeed(float s)
+	{
+		camera.setZoomSpeed(s);
 	}
 	public void setSpeed(float speed)
 	{
