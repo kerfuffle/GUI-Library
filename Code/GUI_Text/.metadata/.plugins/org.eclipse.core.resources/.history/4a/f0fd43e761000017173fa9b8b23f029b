@@ -1,0 +1,88 @@
+package net.kerfuffle.Utilities;
+
+import static net.kerfuffle.Utilities.DavisGUI.*;
+
+import static org.lwjgl.opengl.GL11.*;
+
+public class Player {
+
+	private Quad box;
+	private float speed = 5;
+	private boolean cameraFollow = false;
+	
+	private int keyUp, keyDown, keyLeft, keyRight;
+	
+	public Player (Quad box, boolean cameraFollow)
+	{
+		this.box = box;
+		this.cameraFollow = cameraFollow;
+		
+//		if (cameraFollow)
+//		{
+//			glTranslatef(box.x, box.y, 0);
+//		}
+	}
+	
+	public void setKeys(int up, int down, int left, int right)
+	{
+		keyUp = up;
+		keyDown = down;
+		keyRight = right;
+		keyLeft = left;
+	}
+	public void setSpeed(float speed)
+	{
+		this.speed = speed;
+	}
+	public void cameraFollow(boolean b)
+	{
+		cameraFollow = b;
+	}
+	
+	
+	
+	private void checkMovement()
+	{
+		if (keyDown(keyUp))
+		{
+			box.y += speed;
+			if (cameraFollow)
+			{
+				glTranslatef(0, -speed, 0);
+			}
+		}
+		if (keyDown(keyDown))
+		{
+			box.y -= speed;
+			if (cameraFollow)
+			{
+				glTranslatef(0, speed, 0);
+			}
+		}
+		if (keyDown(keyLeft))
+		{
+			box.x -= speed;
+			if (cameraFollow)
+			{
+				glTranslatef(speed, 0, 0);
+			}
+		}
+		if (keyDown(keyRight))
+		{
+			box.x += speed;
+			if (cameraFollow)
+			{
+				glTranslatef(-speed, 0, 0);
+			}
+		}
+	}
+
+	
+	
+	public void update()
+	{
+		checkMovement();
+		box.draw();
+	}
+	
+}

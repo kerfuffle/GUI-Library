@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.Player"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.Quad"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.RGB"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.Camera2D"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 </qualifiedTypeNameHistroy>

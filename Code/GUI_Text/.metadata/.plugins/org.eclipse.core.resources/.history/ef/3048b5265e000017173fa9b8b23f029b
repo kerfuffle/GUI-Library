@@ -1,0 +1,79 @@
+package net.kerfuffle.Utilities;
+
+import static net.kerfuffle.Utilities.DavisGUI.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.glfw.GLFW.*;
+
+public class Camera2D {
+
+	private int up, down, left, right;
+	private float x, y, speed = 1;
+	
+	
+	public Camera2D(float x, float y, int up, int down, int left, int right)
+	{
+		this.x=x;
+		this.y=y;
+		this.up=up;
+		this.down=down;
+		this.right=right;
+		this.left=left;
+	}
+	
+	public void setSpeed(float speed)
+	{
+		this.speed=speed;
+	}
+	public float getX()
+	{
+		return x;
+	}
+	public float getY()
+	{
+		return y;
+	}
+	
+	private void checkKeys()
+	{
+		if (keyDown(up))
+		{
+			y+=speed;
+			glTranslatef(0, -speed, 0);
+		}
+		if (keyDown(down))
+		{
+			y-=speed;
+			glTranslatef(0, speed, 0);
+		}
+		if (keyDown(left))
+		{
+			x-=speed;
+			glTranslatef(speed, 0, 0);
+		}
+		if (keyDown(right))
+		{
+			x+=speed;
+			glTranslatef(-speed, 0, 0);
+		}
+		if(keyDown(GLFW_KEY_P))
+		{
+			glTranslatef(0,0,speed);
+			//glScalef(0, 0, speed);
+		}
+		if(keyDown(GLFW_KEY_O))
+		{
+			glTranslatef(0,0,-speed);
+			glScalef(1,1,1);
+		}
+	}
+	
+	
+	public void update()
+	{
+		checkKeys();
+		
+		
+	}
+	
+	
+}
