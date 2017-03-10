@@ -29,6 +29,10 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -41,6 +45,9 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
+
+import de.matthiasmann.twl.utils.PNGDecoder;
+import de.matthiasmann.twl.utils.PNGDecoder.Format;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBEasyFont.stb_easy_font_print;
@@ -218,8 +225,68 @@ public abstract class DavisGUI {
 	}
 
 
+	public static class PNG
+	{
+		private int width, height;
+		private ByteBuffer buffer;
+		
+		public PNG(int width, int height, ByteBuffer buffer)
+		{
+			this.width = width;
+			this.height = height;
+			this.buffer = buffer;
+		}
+		
+		
+		public ByteBuffer getBuffer()
+		{
+			return buffer;
+		}
+		public int getWidth()
+		{
+			return width;
+		}
+		public int getHeight()
+		{
+			return height;
+		}
+	}
+	
+	public static PNG getPNG(String path) throws IOException
+	{
+		InputStream in = new FileInputStream(path);
+		PNGDecoder decoder = null;
+		ByteBuffer buf = null;
+		try {
+		   decoder = new PNGDecoder(in);
+		 
+//		   System.out.println("width="+decoder.getWidth());
+//		   System.out.println("height="+decoder.getHeight());
+		 
+		   buf = ByteBuffer.allocateDirect(4*decoder.getWidth()*decoder.getHeight());
+		   decoder.decode(buf, decoder.getWidth()*4, Format.RGBA);
+		   buf.flip();
+		} finally {
+		   in.close();
+		}
+		
+		
+		PNG png = new PNG(decoder.getWidth(), decoder.getHeight(), buf);
+		
+		return png;
+	}
 
-
+	public void quadTex(float x, float y, float w, float h, PNG png)
+	{
+		glEnable(GL_TEXTURE_2D);
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, png.getWidth(), png.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, png.getBuffer());
+		quad(x,y,w,h);
+		glDisable(GL_TEXTURE_2D);
+	}
+	
+	
+	
+	
 
 	
 }

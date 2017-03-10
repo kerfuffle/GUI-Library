@@ -82,13 +82,16 @@ public class Player {
 	public void update()
 	{
 		
-		
-		
+	
 		checkMovement();
+		
+		//System.out.println("PLAYER: " + box.x + ", " + box.y);
+		
 		// MAKE SURE camera follow comes after checkMovement or zoom will be out of sync with translational movement
+		float centerX = box.x+(box.w/2), centerY = box.y+(box.h/2);
 		if (cameraFollow)
 		{
-			camera.setFocusZoom(box.x+(box.w/2), box.y+(box.h/2));
+			camera.setFocusZoom(centerX, centerY);
 			camera.update();
 		}
 		
