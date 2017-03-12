@@ -117,6 +117,14 @@ public class DavisImage implements DavisObject{
 	public void finish()
 	{
 		stbi_image_free(image);
+
+		if ( debugProc != null )
+			debugProc.free();
+
+		glfwFreeCallbacks(window);
+		glfwDestroyWindow(window);
+		glfwTerminate();
+		glfwSetErrorCallback(null).free();
 	}
 
 }

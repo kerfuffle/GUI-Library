@@ -84,7 +84,6 @@ public class HelloWorld extends DavisGUI{
 		
 		base.draw();
 		
-		glColor3f(1,1,1);
 		di.draw();
 		
 		glColor3f(1,1,1);

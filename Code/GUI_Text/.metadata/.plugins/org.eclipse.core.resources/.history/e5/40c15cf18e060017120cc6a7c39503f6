@@ -12,7 +12,6 @@ import net.kerfuffle.Utilities.Quad;
 import net.kerfuffle.Utilities.RGB;
 import net.kerfuffle.Utilities.Text;
 import net.kerfuffle.Utilities.DavisGUI.PNG;
-import net.kerfuffle.Utilities.DavisImage;
 
 import java.io.IOException;
 import java.nio.*;
@@ -54,7 +53,6 @@ public class HelloWorld extends DavisGUI{
 	}
 
 	
-	DavisImage di;
 	public void	childInit()
 	{
 		p = new Player(new Quad(0-25, 0-25, 50, 50, new RGB(0,1,0)), GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, true);
@@ -66,8 +64,6 @@ public class HelloWorld extends DavisGUI{
 		base = new Quad(250, 250, 1, 1, new RGB(1,1,0));
 		
 		ByteBuffer charBuffer = BufferUtils.createByteBuffer(2 * 270);
-		
-		di = new DavisImage("res/images.png");
 		
 		//t = stb_easy_font_print(0,0,"hi",null,charBuffer);
 		//glVertexPointer(2, GL_FLOAT, 16, charBuffer);
@@ -84,8 +80,6 @@ public class HelloWorld extends DavisGUI{
 		
 		base.draw();
 		
-		glColor3f(1,1,1);
-		di.draw();
 		
 		glColor3f(1,1,1);
 		quadTex(100, 100, 100, 100, pic);

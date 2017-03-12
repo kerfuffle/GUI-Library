@@ -146,7 +146,7 @@ public abstract class DavisGUI {
 	{
 		GL.createCapabilities();
 		
-		
+		childInit();
 		
 		glEnableClientState(GL_VERTEX_ARRAY);
 		//glEnableClientState(GL11.GL_3D);
@@ -156,7 +156,6 @@ public abstract class DavisGUI {
 		glEnable(GL_DEPTH_TEST);
 		glOrtho(-windowWidth/2, windowWidth/2, -windowHeight/2, windowHeight/2, 0, 100);
 		
-		childInit();
 		
 		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();

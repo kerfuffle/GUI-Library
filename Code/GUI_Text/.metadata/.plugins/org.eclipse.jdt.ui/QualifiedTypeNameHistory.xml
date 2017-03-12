@@ -28,4 +28,5 @@
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL"/>
 <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWVidMode"/>
 <fullyQualifiedTypeName name="java.awt.Image"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.DavisImage"/>
 </qualifiedTypeNameHistroy>

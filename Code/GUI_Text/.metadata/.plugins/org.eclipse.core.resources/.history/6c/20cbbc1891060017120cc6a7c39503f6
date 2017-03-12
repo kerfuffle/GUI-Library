@@ -67,7 +67,7 @@ public class HelloWorld extends DavisGUI{
 		
 		ByteBuffer charBuffer = BufferUtils.createByteBuffer(2 * 270);
 		
-		di = new DavisImage("res/images.png");
+		di = new DavisImage("res/image.png");
 		
 		//t = stb_easy_font_print(0,0,"hi",null,charBuffer);
 		//glVertexPointer(2, GL_FLOAT, 16, charBuffer);
@@ -84,7 +84,6 @@ public class HelloWorld extends DavisGUI{
 		
 		base.draw();
 		
-		glColor3f(1,1,1);
 		di.draw();
 		
 		glColor3f(1,1,1);
