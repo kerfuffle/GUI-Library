@@ -225,63 +225,26 @@ public abstract class DavisGUI {
 		glColor3f(color.R(), color.G(), color.B());
 	}
 
-
-	public static class PNG
-	{
-		private int width, height;
-		private ByteBuffer buffer;
-		
-		public PNG(int width, int height, ByteBuffer buffer)
-		{
-			this.width = width;
-			this.height = height;
-			this.buffer = buffer;
-		}
-		
-		
-		public ByteBuffer getBuffer()
-		{
-			return buffer;
-		}
-		public int getWidth()
-		{
-			return width;
-		}
-		public int getHeight()
-		{
-			return height;
-		}
-	}
-	
-	public static PNG getPNG(String path) throws IOException
-	{
-		InputStream in = new FileInputStream(path);
-		PNGDecoder decoder = null;
-		ByteBuffer buf = null;
-		try {
-		   decoder = new PNGDecoder(in);
-		 
-//		   System.out.println("width="+decoder.getWidth());
-//		   System.out.println("height="+decoder.getHeight());
-		 
-		   buf = ByteBuffer.allocateDirect(4*decoder.getWidth()*decoder.getHeight());
-		   decoder.decode(buf, decoder.getWidth()*4, Format.RGBA);
-		   buf.flip();
-		} finally {
-		   in.close();
-		}
-		
-		
-		PNG png = new PNG(decoder.getWidth(), decoder.getHeight(), buf);
-		
-		return png;
-	}
-
-	public void quadTex(float x, float y, float w, float h, PNG png)
+	public static void quadTex(float x, float y, float w, float h)
 	{
 		glEnable(GL_TEXTURE_2D);
-		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, png.getWidth(), png.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, png.getBuffer());
-		quad(x,y,w,h);
+		
+		glBegin(GL_QUADS);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex2f(x, y);
+		
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex2f(x+w, y);
+		
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(x+w, y+h);
+		
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex2f(x, y+h);
+		
+		glEnd();
+		
 		glDisable(GL_TEXTURE_2D);
 	}
 	

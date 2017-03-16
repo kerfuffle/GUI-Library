@@ -20,7 +20,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.MemoryUtil.*;
-
+import static net.kerfuffle.Utilities.DavisGUI.*;
 
 public class DavisImage implements DavisObject{
 
@@ -36,6 +36,7 @@ public class DavisImage implements DavisObject{
 	private Callback debugProc;
 
 	public DavisImage(String imagePath) {
+		
 		ByteBuffer imageBuffer;
 		try {
 			imageBuffer = ioResourceToByteBuffer(imagePath, 8 * 1024);
@@ -50,10 +51,10 @@ public class DavisImage implements DavisObject{
 		if ( !stbi_info_from_memory(imageBuffer, w, h, comp) )
 			throw new RuntimeException("Failed to read image information: " + stbi_failure_reason());
 
-		System.out.println("Image width: " + w.get(0));
-		System.out.println("Image height: " + h.get(0));
-		System.out.println("Image components: " + comp.get(0));
-		System.out.println("Image HDR: " + stbi_is_hdr_from_memory(imageBuffer));
+//		System.out.println("Image width: " + w.get(0));
+//		System.out.println("Image height: " + h.get(0));
+//		System.out.println("Image components: " + comp.get(0));
+//		System.out.println("Image HDR: " + stbi_is_hdr_from_memory(imageBuffer));
 
 		// Decode the image
 		image = stbi_load_from_memory(imageBuffer, w, h, comp, 0);
@@ -90,24 +91,26 @@ public class DavisImage implements DavisObject{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	}
 	
-	public void draw()
+	public void draw(float x, float y, float w, float h)
 	{
+		init();
+		
 		glEnable(GL_TEXTURE_2D);
 		
 		glBegin(GL_QUADS);
 
-		glTexCoord2f(0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-
-		glTexCoord2f(1.0f, 0.0f);
-		glVertex2f(w, 0.0f);
-
-		glTexCoord2f(1.0f, 1.0f);
-		glVertex2f(w, h);
-
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex2f(0.0f, h);
-
+		glVertex2f(x, y);
+		
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex2f(x+w, y);
+		
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(x+w, y+h);
+		
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex2f(x, y+h);
+		
 		glEnd();
 		
 		glDisable(GL_TEXTURE_2D);

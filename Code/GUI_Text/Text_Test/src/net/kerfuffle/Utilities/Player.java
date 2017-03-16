@@ -30,6 +30,11 @@ public class Player {
 		}
 	}
 	
+	public void setTexture(String path)
+	{
+		box.setTexture(path);
+	}
+	
 	public void setKeys(int up, int down, int left, int right)
 	{
 		keyUp = up;

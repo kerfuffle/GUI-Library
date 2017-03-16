@@ -6,7 +6,7 @@ public class Quad {
 
 	public float x, y, w, h;
 	private RGB color;
-	
+	private DavisImage di;
 	
 
 	public Quad(float x, float y, float w, float h, RGB color)
@@ -17,6 +17,11 @@ public class Quad {
 		this.h=h;
 		this.color=color;
 	}
+	
+	public void setTexture(String path)
+	{
+		di = new DavisImage(path);
+	}
 
 	public RGB getColor()
 	{
@@ -26,8 +31,16 @@ public class Quad {
 	
 	public void draw()
 	{
-		setColor(color);
-		quad(x,y,w,h);
+		if (di == null)
+		{
+			setColor(color);
+			quad(x,y,w,h);
+		}
+		else
+		{
+			setColor(new RGB(1,1,1));
+			di.draw(x, y, w, h);
+		}
 	}
 	
 }

@@ -1,0 +1,15 @@
+package net.kerfuffle.Utilities;
+
+public class Triangle {
+
+	Vertex verticies[] = new Vertex[3];
+	
+	public Triangle ()
+	{
+		
+	}
+	
+	
+	
+	
+}
