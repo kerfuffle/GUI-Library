@@ -12,6 +12,7 @@ import net.kerfuffle.Utilities.Polygon;
 import net.kerfuffle.Utilities.Quad;
 import net.kerfuffle.Utilities.RGB;
 import net.kerfuffle.Utilities.Text;
+import net.kerfuffle.Utilities.Triangle;
 import net.kerfuffle.Utilities.DavisImage;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class HelloWorld extends DavisGUI{
 	
 	private Player p;
 	private Polygon poly;
+	private Triangle tri;
 	
 	public HelloWorld()
 	{
@@ -51,6 +53,12 @@ public class HelloWorld extends DavisGUI{
 		p.setZoomSpeed(1.01f);
 		p.setTexture("res/A.png");
 		
+		tri = new Triangle(-200, -200);
+		
+		tri.setRelativeVertex(0, -100, -100);
+		tri.setRelativeVertex(1, 50, 50);
+		tri.setRelativeVertex(2, -50, 25);
+		
 		/*poly = new Polygon(-200, -200);
 		poly.addRelativeVertex(-50, -50);
 		poly.addRelativeVertex(50,  50);
@@ -59,9 +67,8 @@ public class HelloWorld extends DavisGUI{
 	
 	public void childLoop() 
 	{
-		glColor3f(1,0,0);
-		poly.draw();
 		
+		tri.draw();
 		
 		p.update();
 	}

@@ -1,5 +1,6 @@
 package net.kerfuffle.Utilities;
 
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.GLFW_FALSE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
@@ -34,6 +35,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 
@@ -249,8 +251,19 @@ public abstract class DavisGUI {
 	}
 	
 	
+	public static float[] getMousePos()
+	{
+		DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
+		DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
+		
+		float ret[] = new float[2];
+		glfwGetCursorPos(window, x, y);
+		
+		ret[0] = (float) x.get(0);
+		ret[1] = (float) y.get(0);
+		
+		return ret;
+	}
 	
-	
-
 	
 }

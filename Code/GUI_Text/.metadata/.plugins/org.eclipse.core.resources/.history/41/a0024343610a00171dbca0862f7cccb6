@@ -29,6 +29,10 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -41,6 +45,9 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
+
+import de.matthiasmann.twl.utils.PNGDecoder;
+import de.matthiasmann.twl.utils.PNGDecoder.Format;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBEasyFont.stb_easy_font_print;
@@ -139,7 +146,7 @@ public abstract class DavisGUI {
 	{
 		GL.createCapabilities();
 		
-		childInit();
+		
 		
 		glEnableClientState(GL_VERTEX_ARRAY);
 		//glEnableClientState(GL11.GL_3D);
@@ -149,6 +156,7 @@ public abstract class DavisGUI {
 		glEnable(GL_DEPTH_TEST);
 		glOrtho(-windowWidth/2, windowWidth/2, -windowHeight/2, windowHeight/2, 0, 100);
 		
+		childInit();
 		
 		while ( !glfwWindowShouldClose(window) ) {
 			glfwPollEvents();
@@ -217,25 +225,32 @@ public abstract class DavisGUI {
 		glColor3f(color.R(), color.G(), color.B());
 	}
 
+	public static void quadTex(float x, float y, float w, float h)
+	{
+		glEnable(GL_TEXTURE_2D);
+		
+		glBegin(GL_QUADS);
 
-	
-
-	InputStream in = new FileInputStream("white_pixel.png");
-	try {
-	   PNGDecoder decoder = new PNGDecoder(in);
-	 
-	   System.out.println("width="+decoder.getWidth());
-	   System.out.println("height="+decoder.getHeight());
-	 
-	   ByteBuffer buf = ByteBuffer.allocateDirect(4*decoder.getWidth()*decoder.getHeight());
-	   decoder.decode(buf, decoder.getWidth()*4, Format.RGBA);
-	   buf.flip();
-	} finally {
-	   in.close();
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex2f(x, y);
+		
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex2f(x+w, y);
+		
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(x+w, y+h);
+		
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex2f(x, y+h);
+		
+		glEnd();
+		
+		glDisable(GL_TEXTURE_2D);
 	}
 	
 	
-	GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, decoder.getWidth(), decoder.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
+	
+	
 
 	
 }

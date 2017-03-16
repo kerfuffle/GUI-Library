@@ -39,9 +39,8 @@ public class Triangle {
 			glBegin(GL_TRIANGLES);
 			for (Vertex v : verticies)
 			{
-				glVertex2f(v.x, v.y);
+				
 			}
-			glEnd();
 		}
 	}
 	
