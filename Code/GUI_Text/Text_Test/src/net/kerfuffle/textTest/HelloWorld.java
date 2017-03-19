@@ -5,6 +5,7 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+import net.kerfuffle.Utilities.Button;
 import net.kerfuffle.Utilities.Camera2D;
 import net.kerfuffle.Utilities.DavisGUI;
 import net.kerfuffle.Utilities.Player;
@@ -14,6 +15,7 @@ import net.kerfuffle.Utilities.RGB;
 import net.kerfuffle.Utilities.Text;
 import net.kerfuffle.Utilities.Triangle;
 import net.kerfuffle.Utilities.DavisImage;
+import net.kerfuffle.Utilities.OnClickListener;
 
 import java.io.IOException;
 import java.nio.*;
@@ -35,6 +37,8 @@ public class HelloWorld extends DavisGUI{
 	private Player p;
 	private Polygon poly;
 	private Triangle tri;
+	
+	private Button butt;
 	
 	public HelloWorld()
 	{
@@ -59,6 +63,15 @@ public class HelloWorld extends DavisGUI{
 		tri.setRelativeVertex(1, 50, 50);
 		tri.setRelativeVertex(2, -50, 25);
 		
+		butt = new Button(new Quad(-500, -500, 200, 200, new RGB(0,1,1)));
+		butt.setOnClickListener(new OnClickListener()
+				{
+					public void onClick() 
+					{
+						System.out.println("triggered");
+					}
+				});
+		
 		/*poly = new Polygon(-200, -200);
 		poly.addRelativeVertex(-50, -50);
 		poly.addRelativeVertex(50,  50);
@@ -69,6 +82,13 @@ public class HelloWorld extends DavisGUI{
 	{
 		
 		tri.draw();
+		
+		butt.update();
+		
+		if (isIn(p.getQuad().x, p.getQuad().y, butt.getQuad()))
+		{
+			System.out.println("inme");
+		}
 		
 		p.update();
 	}

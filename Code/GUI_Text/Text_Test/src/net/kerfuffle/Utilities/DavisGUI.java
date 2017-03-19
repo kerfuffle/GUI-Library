@@ -62,10 +62,13 @@ public abstract class DavisGUI {
 	protected static long window;
 
 	protected String windowName;
-	protected int windowWidth, windowHeight;
+	protected static int windowWidth;
+
+	protected static int windowHeight;
 	public static float aspectRatio;
 	public static float scale = 1;
 	
+	public static float originX = 0, originY = 0;
 	
 	
 	public DavisGUI(String windowName, float windowWidth, float windowHeight)
@@ -262,8 +265,88 @@ public abstract class DavisGUI {
 		ret[0] = (float) x.get(0);
 		ret[1] = (float) y.get(0);
 		
+		ret[0] = (originX - windowWidth/2) + ret[0]; // scales with center of screen at 0,0
+		ret[1] = (originY + windowHeight/2) - ret[1]; //scales and flips
+
 		return ret;
 	}
 	
+	public static boolean isCollide(Quad q1, Quad q2)
+	{
+		float area1 = q1.w*q1.h;
+		float area2 = q2.w*q2.h;
+		
+		if (area1 >= area2)
+		{
+			//check if q2 is stepping inside of q1
+			// basically check if all four points on q2 are in bounds of q1
+			if (isIn(q1.x, q1.y, q2) || isIn(q1.x+q1.w, q1.y, q2) || isIn(q1.x+q1.w, q1.y+q1.h, q2) || isIn(q1.x, q1.y+q1.h, q2))
+			{
+				return true;
+			}
+		}
+		else if (area2 > area1)
+		{
+			//check if q1 is stepping inside q2
+			if (isIn(q2.x, q2.y, q1) || isIn(q2.x+q2.w, q2.y, q1) || isIn(q2.x+q2.w, q2.y+q2.h, q1) || isIn(q2.x, q2.y+q2.h, q1))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isIn(float mx, float my, Quad q)
+	{
+		if (mx > q.x && mx < q.x+q.w && my > q.y && my < q.y+q.h)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isClick(float x, float y, float w, float h)
+	{
+		if (isHover(x,y,w,h) && checkMouse(GLFW_MOUSE_BUTTON_LEFT))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean mouseStates[] = new boolean[2];
+	public static boolean checkMouse(int i)
+	{
+		int state = glfwGetMouseButton(window, i);
+		
+		if ((state == GLFW.GLFW_PRESS) != mouseStates[i])
+		{
+			return mouseStates[i] = !mouseStates[i];
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public static boolean isHover(float x, float y, float w, float h)
+	{
+		float mousePos[] = new float[2];
+		mousePos = getMousePos();
+		
+		if (mousePos[0] > x && mousePos[0] < x+w && mousePos[1] > y && mousePos[1] < y+h)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static void offsetScreen(float x, float y, float z)
+	{
+		originX += -x;
+		originY += -y;
+		glTranslatef(x,y,z);
+	}
 	
 }

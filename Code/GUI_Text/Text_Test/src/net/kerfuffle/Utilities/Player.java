@@ -60,6 +60,10 @@ public class Player {
 		cameraFollow = b;
 	}
 	
+	public Quad getQuad()
+	{
+		return box;
+	}
 	
 	
 	private void checkMovement()
@@ -87,7 +91,6 @@ public class Player {
 	public void update()
 	{
 		
-	
 		checkMovement();
 		
 		//System.out.println("PLAYER: " + box.x + ", " + box.y);

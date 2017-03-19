@@ -58,22 +58,22 @@ public class Camera2D {
 		if (keyDown(up))
 		{
 			y+=speed;
-			glTranslatef(0, -speed, 0);
+			offsetScreen(0, -speed, 0);
 		}
 		if (keyDown(down))
 		{
 			y-=speed;
-			glTranslatef(0, speed, 0);
+			offsetScreen(0, speed, 0);
 		}
 		if (keyDown(left))
 		{
 			x-=speed;
-			glTranslatef(speed, 0, 0);
+			offsetScreen(speed, 0, 0);
 		}
 		if (keyDown(right))
 		{
 			x+=speed;
-			glTranslatef(-speed, 0, 0);
+			offsetScreen(-speed, 0, 0);
 		}
 		if (zOut != -1)
 		{

@@ -3,9 +3,10 @@ package net.kerfuffle.Utilities;
 import static net.kerfuffle.Utilities.DavisGUI.*;
 
 public class Button {
-
+	
 	private Triangle triangle;
 	private Quad quad;
+	private OnClickListener onClickListener;
 	
 	public Button(Quad quad)
 	{
@@ -26,10 +27,10 @@ public class Button {
 		return quad;
 	}
 	
-	private float[] mousePos = new float[2];
-	private void checkClick()
+	
+	public void setOnClickListener(OnClickListener ocl)
 	{
-		mousePos = getMousePos();
+		onClickListener = ocl;
 	}
 	
 	
@@ -41,6 +42,10 @@ public class Button {
 		}
 		if (quad != null)
 		{
+			if (isClick(quad.x, quad.y, quad.w, quad.h))
+			{
+				onClickListener.onClick();
+			}
 			quad.draw();
 		}
 	}

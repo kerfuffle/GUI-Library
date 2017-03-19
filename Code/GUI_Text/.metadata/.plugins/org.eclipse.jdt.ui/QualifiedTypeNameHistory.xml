@@ -5,12 +5,10 @@
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.Quad"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.RGB"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.Camera2D"/>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="org.lwjgl.stb.STBTTBakedChar"/>
 <fullyQualifiedTypeName name="java.nio.FloatBuffer"/>
 <fullyQualifiedTypeName name="org.lwjgl.system.MemoryStack"/>
 <fullyQualifiedTypeName name="org.lwjgl.stb.STBTTAlignedQuad"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.Text"/>
 <fullyQualifiedTypeName name="de.matthiasmann.twl.utils.PNGDecoder"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
@@ -29,4 +27,9 @@
 <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWVidMode"/>
 <fullyQualifiedTypeName name="java.awt.Image"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.DavisImage"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.Polygon"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.Triangle"/>
+<fullyQualifiedTypeName name="java.nio.DoubleBuffer"/>
 </qualifiedTypeNameHistroy>
