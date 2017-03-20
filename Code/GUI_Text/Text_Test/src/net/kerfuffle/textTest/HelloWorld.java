@@ -64,11 +64,12 @@ public class HelloWorld extends DavisGUI{
 		tri.setRelativeVertex(2, -50, 25);
 		
 		butt = new Button(new Quad(-500, -500, 200, 200, new RGB(0,1,1)));
+		butt.setTexture("res/images.png");
 		butt.setOnClickListener(new OnClickListener()
 				{
 					public void onClick() 
 					{
-						System.out.println("triggered");
+						//System.out.println("triggered");
 					}
 				});
 		
@@ -85,9 +86,9 @@ public class HelloWorld extends DavisGUI{
 		
 		butt.update();
 		
-		if (isIn(p.getQuad().x, p.getQuad().y, butt.getQuad()))
+		if (isCollide(p.getQuad(), butt.getQuad()))
 		{
-			System.out.println("inme");
+			System.out.println("yus");
 		}
 		
 		p.update();

@@ -26,10 +26,7 @@ public class Button {
 	{
 		return quad;
 	}
-	public void setTexture(String path)
-	{
-		quad.setTexture(path);
-	}
+	
 	
 	public void setOnClickListener(OnClickListener ocl)
 	{

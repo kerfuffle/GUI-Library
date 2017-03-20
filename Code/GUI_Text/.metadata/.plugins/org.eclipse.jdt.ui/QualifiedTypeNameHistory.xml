@@ -32,4 +32,6 @@
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.Triangle"/>
 <fullyQualifiedTypeName name="java.nio.DoubleBuffer"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.Button"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.OnClickListener"/>
 </qualifiedTypeNameHistroy>
