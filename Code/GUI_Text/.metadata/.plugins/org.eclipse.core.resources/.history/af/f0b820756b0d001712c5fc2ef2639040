@@ -227,10 +227,7 @@ public abstract class DavisGUI {
 	
 	public static void setColor(RGB color)
 	{
-		if (color != null)
-		{
-			glColor3f(color.R(), color.G(), color.B());
-		}
+		glColor3f(color.R(), color.G(), color.B());
 	}
 
 	public static void quadTex(float x, float y, float w, float h)
@@ -282,15 +279,16 @@ public abstract class DavisGUI {
 		if (area1 <= area2)
 		{
 			//check if q2 is stepping inside of q1
-			// basically check if all four points on q1 are in bounds of q2
+			// basically check if all four points on q2 are in bounds of q1
 			if (isIn(q1.x, q1.y, q2) || isIn(q1.x+q1.w, q1.y, q2) || isIn(q1.x+q1.w, q1.y+q1.h, q2) || isIn(q1.x, q1.y+q1.h, q2))
 			{
+				System.out.println("inside");
 				return true;
 			}
 		}
 		else if (area1 > area2)
 		{
-			//check if q2 is stepping inside q1
+			//check if q1 is stepping inside q2
 			if (isIn(q2.x, q2.y, q1) || isIn(q2.x+q2.w, q2.y, q1) || isIn(q2.x+q2.w, q2.y+q2.h, q1) || isIn(q2.x, q2.y+q2.h, q1))
 			{
 				return true;
@@ -352,33 +350,4 @@ public abstract class DavisGUI {
 		glTranslatef(x,y,z);
 	}
 	
-	public static Quad getTriangleBounds(Triangle tri)
-	{
-		Vertex[] vs = tri.getVerticies();
-		
-		float x = vs[0].x;
-		float y = vs[0].y;
-		float w=0,h=0;
-		if (vs[1].x > vs[2].x)
-		{
-			w = (vs[0].x - vs[1].x);
-		}
-		else if (vs[1].x < vs[2].x)
-		{
-			w = (vs[0].x - vs[2].x);
-		}
-		
-		if (vs[1].y > vs[2].y)
-		{
-			h = (vs[0].y - vs[1].y);
-		}
-		else if (vs[1].y < vs[2].y)
-		{
-			h = (vs[0].y - vs[2].y);
-		}
-		
-		Quad ret = new Quad(x,y,w,h,null);
-		
-		return ret;
-	}
 }

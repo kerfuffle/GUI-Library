@@ -39,7 +39,6 @@ public class HelloWorld extends DavisGUI{
 	private Triangle tri;
 	
 	private Button butt;
-	private Button triButt;
 	
 	public HelloWorld()
 	{
@@ -56,12 +55,13 @@ public class HelloWorld extends DavisGUI{
 		p = new Player(new Quad(0-25, 0-25, 50, 50, new RGB(0,1,0)), GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, true);
 		p.setZoomKeys(GLFW_KEY_O, GLFW_KEY_P);
 		p.setZoomSpeed(1.01f);
-		p.setTexture("res/A.png");
+		//p.setTexture("res/A.png");
 		
-		tri = new Triangle(-200, -200, new RGB(1,0,1));
-		tri.setRelativeVertex(0, 0, 0);
-		tri.setRelativeVertex(1, 0, 100);
-		tri.setRelativeVertex(2, -50, 50);
+		tri = new Triangle(-200, -200);
+		
+		tri.setRelativeVertex(0, -100, -100);
+		tri.setRelativeVertex(1, 50, 50);
+		tri.setRelativeVertex(2, -50, 25);
 		
 		butt = new Button(new Quad(-500, -500, 200, 200, new RGB(0,1,1)));
 		butt.setTexture("res/images.png");
@@ -69,18 +69,9 @@ public class HelloWorld extends DavisGUI{
 				{
 					public void onClick() 
 					{
-						System.out.println("triggered");
+						//System.out.println("triggered");
 					}
 				});
-		
-		triButt = new Button(tri);
-		triButt.setOnClickListener(new OnClickListener()
-		{
-			public void onClick() 
-			{
-				System.out.println("triggered");
-			}
-		});
 		
 		/*poly = new Polygon(-200, -200);
 		poly.addRelativeVertex(-50, -50);
@@ -91,13 +82,13 @@ public class HelloWorld extends DavisGUI{
 	public void childLoop() 
 	{
 		
-		triButt.update();
+		tri.draw();
 		
 		butt.update();
 		
 		if (isCollide(p.getQuad(), butt.getQuad()))
 		{
-			System.out.println("yus");
+			//System.out.println("yus");
 		}
 		
 		p.update();

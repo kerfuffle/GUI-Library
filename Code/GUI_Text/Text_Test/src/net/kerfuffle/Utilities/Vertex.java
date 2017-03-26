@@ -2,7 +2,7 @@ package net.kerfuffle.Utilities;
 
 public class Vertex {
 
-	float x, y, z;
+	public float x, y, z;
 	
 	public Vertex( float x, float y)		//do not need z as of now
 	{

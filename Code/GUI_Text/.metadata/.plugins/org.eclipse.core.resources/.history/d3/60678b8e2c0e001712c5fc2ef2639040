@@ -39,7 +39,6 @@ public class HelloWorld extends DavisGUI{
 	private Triangle tri;
 	
 	private Button butt;
-	private Button triButt;
 	
 	public HelloWorld()
 	{
@@ -73,15 +72,6 @@ public class HelloWorld extends DavisGUI{
 					}
 				});
 		
-		triButt = new Button(tri);
-		triButt.setOnClickListener(new OnClickListener()
-		{
-			public void onClick() 
-			{
-				System.out.println("triggered");
-			}
-		});
-		
 		/*poly = new Polygon(-200, -200);
 		poly.addRelativeVertex(-50, -50);
 		poly.addRelativeVertex(50,  50);
@@ -91,7 +81,7 @@ public class HelloWorld extends DavisGUI{
 	public void childLoop() 
 	{
 		
-		triButt.update();
+		tri.draw();
 		
 		butt.update();
 		

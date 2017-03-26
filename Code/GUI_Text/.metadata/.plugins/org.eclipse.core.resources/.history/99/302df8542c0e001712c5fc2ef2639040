@@ -40,14 +40,12 @@ public class Button {
 	public void update()
 	{
 		if (triangle != null)
-		{	
+		{
+			triangle.draw();
+			
 			Quad bounds = getTriangleBounds(triangle);
 			
-			if (isClick(bounds.x, bounds.y, bounds.w, bounds.h))
-			{
-				onClickListener.onClick();
-			}
-			triangle.draw();
+			
 		}
 		if (quad != null)
 		{
