@@ -28,17 +28,21 @@ public class Quad {
 		return color;
 	}
 	
+	public void setColor(RGB color)
+	{
+		this.color=color;
+	}
 	
 	public void draw()
 	{
 		if (di == null)
 		{
-			setColor(color);
+			color(color);
 			quad(x,y,w,h);
 		}
 		else
 		{
-			setColor(new RGB(1,1,1));
+			color(new RGB(1,1,1));
 			di.draw(x, y, w, h);
 		}
 	}

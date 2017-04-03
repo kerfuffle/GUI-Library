@@ -337,10 +337,36 @@ public abstract class DavisGUI {
 		float mousePos[] = new float[2];
 		mousePos = getMousePos();
 		
-		if (mousePos[0] > x && mousePos[0] < x+w && mousePos[1] > y && mousePos[1] < y+h)
+		if (w > 0 && h > 0)
 		{
-			return true;
+			if (mousePos[0] > x && mousePos[0] < x+w && mousePos[1] > y && mousePos[1] < y+h)
+			{
+				return true;
+			}
 		}
+		else if (w < 0 && h > 0)
+		{
+			if (mousePos[0] < x && mousePos[0] > x+w && mousePos[1] > y && mousePos[1] < y+h)
+			{
+				return true;
+			}
+		}
+		else if (w > 0 && h < 0)
+		{
+			if (mousePos[0] > x && mousePos[0] < x+w && mousePos[1] < y && mousePos[1] > y+h)
+			{
+				return true;
+			}
+		}
+		else if (w < 0 && h < 0)
+		{
+			if (mousePos[0] < x && mousePos[0] > x+w && mousePos[1] < y && mousePos[1] > y+h)
+			{
+				return true;
+			}
+		}
+		
+		
 		
 		return false;
 	}
@@ -354,31 +380,40 @@ public abstract class DavisGUI {
 	
 	public static Quad getTriangleBounds(Triangle tri)
 	{
-		Vertex[] vs = tri.getVerticies();
+		Vertex[] vs = tri.getRelatives();
+		float oX = tri.getX();
+		float oY = tri.getY();
 		
-		float x = vs[0].x;
-		float y = vs[0].y;
+		
+		float x = oX+vs[0].x;
+		float y = oY+vs[0].y;
 		float w=0,h=0;
-		if (vs[1].x > vs[2].x)
+		if (Math.abs(vs[1].x) > Math.abs(vs[2].x))
 		{
-			w = (vs[0].x - vs[1].x);
+			w = -(vs[0].x - vs[1].x);
 		}
-		else if (vs[1].x < vs[2].x)
+		else if (Math.abs(vs[1].x) <= Math.abs(vs[2].x))
 		{
-			w = (vs[0].x - vs[2].x);
+			w = -(vs[0].x - vs[2].x);
 		}
 		
-		if (vs[1].y > vs[2].y)
+		if (Math.abs(vs[1].y) > Math.abs(vs[2].y))
 		{
-			h = (vs[0].y - vs[1].y);
+			
+			h = -(vs[0].y - vs[1].y);
 		}
-		else if (vs[1].y < vs[2].y)
+		else if (Math.abs(vs[1].y) <= Math.abs(vs[2].y))
 		{
-			h = (vs[0].y - vs[2].y);
+			h = -(vs[0].y - vs[2].y);
 		}
 		
 		Quad ret = new Quad(x,y,w,h,null);
 		
 		return ret;
+	}
+	
+	public static void color(RGB c)
+	{
+		glColor3f(c.R(), c.G(), c.B());
 	}
 }

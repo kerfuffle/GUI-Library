@@ -6,6 +6,7 @@ import static net.kerfuffle.Utilities.DavisGUI.*;
 public class Triangle {
 
 	private Vertex verticies[] = new Vertex[3];
+	private Vertex relatives[] = new Vertex[3];
 	
 	private float x, y;
 	private RGB color;
@@ -20,13 +21,26 @@ public class Triangle {
 	public void setRelativeVertex(int vertex, float x, float y)
 	{
 		verticies[vertex] = new Vertex(this.x + x, this.y + y);
+		relatives[vertex] = new Vertex(x,y);
 	}
 	
 	public Vertex[] getVerticies()
 	{
 		return verticies;
 	}
+	public Vertex[] getRelatives()
+	{
+		return relatives;
+	}
 	
+	public float getX()
+	{
+		return x;
+	}
+	public float getY()
+	{
+		return y;
+	}
 	
 	private boolean verticiesNull()
 	{
