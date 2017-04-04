@@ -207,6 +207,15 @@ public abstract class DavisGUI {
 		return false;
 	}
 	
+	public static boolean keyPress(int key)
+	{
+		if (GLFW.glfwGetKey(window, key) == GLFW.GLFW_RELEASE)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public static void quad(float x, float y, float w, float h)
 	{
@@ -325,21 +334,6 @@ public abstract class DavisGUI {
 		if ((state == GLFW.GLFW_PRESS) != mouseStates[i])
 		{
 			return mouseStates[i] = !mouseStates[i];
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	public static boolean keyStates[] = new boolean[1000];
-	public static boolean checkKey(int i)
-	{
-		int state = GLFW.glfwGetKey(window, i);
-		
-		if ((state == GLFW.GLFW_PRESS) != keyStates[i])
-		{
-			return keyStates[i] = !keyStates[i];
 		}
 		else
 		{

@@ -32,10 +32,6 @@ public class Triangle {
 	{
 		return relatives;
 	}
-	public void setColor(RGB color)
-	{
-		this.color = color;
-	}
 	
 	public float getX()
 	{
@@ -62,7 +58,7 @@ public class Triangle {
 	{
 		if (!verticiesNull())
 		{
-			color(color);
+			setColor(color);
 			glBegin(GL_TRIANGLES);
 			for (Vertex v : verticies)
 			{

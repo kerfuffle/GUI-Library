@@ -332,21 +332,6 @@ public abstract class DavisGUI {
 		}
 	}
 	
-	public static boolean keyStates[] = new boolean[1000];
-	public static boolean checkKey(int i)
-	{
-		int state = GLFW.glfwGetKey(window, i);
-		
-		if ((state == GLFW.GLFW_PRESS) != keyStates[i])
-		{
-			return keyStates[i] = !keyStates[i];
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
 	public static boolean isHover(float x, float y, float w, float h)
 	{
 		float mousePos[] = new float[2];

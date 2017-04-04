@@ -27,18 +27,6 @@ public class Button {
 	{
 		return quad;
 	}
-	public void setColor(RGB color)
-	{
-		if (quad != null)
-		{
-			quad.setColor(color);
-		}
-		
-		if (triangle != null)
-		{
-			triangle.setColor(color);
-		}
-	}
 	public void setTexture(String path)
 	{
 		quad.setTexture(path);
@@ -76,10 +64,7 @@ public class Button {
 		
 		if (keyPressListener != null)
 		{
-			if (checkKey(keyPressListener.key))
-			{
-				keyPressListener.onPress();
-			}
+			keyPressListener.onPress();
 		}
 	}
 }

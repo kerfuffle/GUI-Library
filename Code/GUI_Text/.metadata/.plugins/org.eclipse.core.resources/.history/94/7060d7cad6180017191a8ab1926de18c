@@ -36,7 +36,7 @@ public class Button {
 		
 		if (triangle != null)
 		{
-			triangle.setColor(color);
+			triangle
 		}
 	}
 	public void setTexture(String path)
@@ -76,7 +76,7 @@ public class Button {
 		
 		if (keyPressListener != null)
 		{
-			if (checkKey(keyPressListener.key))
+			if (keyPress(keyPressListener.key))
 			{
 				keyPressListener.onPress();
 			}

@@ -1,0 +1,9 @@
+package net.kerfuffle.Utilities;
+
+public abstract class KeyPressListener {
+
+	private int key;
+	
+	public abstract void onPress();
+	
+}

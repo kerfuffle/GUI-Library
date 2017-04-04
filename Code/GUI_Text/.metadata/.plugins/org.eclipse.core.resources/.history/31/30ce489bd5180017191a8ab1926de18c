@@ -27,18 +27,6 @@ public class Button {
 	{
 		return quad;
 	}
-	public void setColor(RGB color)
-	{
-		if (quad != null)
-		{
-			quad.setColor(color);
-		}
-		
-		if (triangle != null)
-		{
-			triangle.setColor(color);
-		}
-	}
 	public void setTexture(String path)
 	{
 		quad.setTexture(path);
@@ -59,7 +47,7 @@ public class Button {
 		{	
 			Quad bounds = getTriangleBounds(triangle);
 			
-			if (isClick(bounds.x, bounds.y, bounds.w, bounds.h) && onClickListener != null)
+			if (isClick(bounds.x, bounds.y, bounds.w, bounds.h))
 			{
 				onClickListener.onClick();
 			}
@@ -67,7 +55,7 @@ public class Button {
 		}
 		if (quad != null)
 		{
-			if (isClick(quad.x, quad.y, quad.w, quad.h) && onClickListener != null)
+			if (isClick(quad.x, quad.y, quad.w, quad.h))
 			{
 				onClickListener.onClick();
 			}
@@ -76,10 +64,7 @@ public class Button {
 		
 		if (keyPressListener != null)
 		{
-			if (checkKey(keyPressListener.key))
-			{
-				keyPressListener.onPress();
-			}
+			keyPressListener.onPress(key);
 		}
 	}
 }

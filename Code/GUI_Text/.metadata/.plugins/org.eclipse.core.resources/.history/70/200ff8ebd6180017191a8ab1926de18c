@@ -62,7 +62,7 @@ public class Triangle {
 	{
 		if (!verticiesNull())
 		{
-			color(color);
+			setColor(color);
 			glBegin(GL_TRIANGLES);
 			for (Vertex v : verticies)
 			{

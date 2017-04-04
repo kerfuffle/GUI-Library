@@ -76,7 +76,7 @@ public class Button {
 		
 		if (keyPressListener != null)
 		{
-			if (checkKey(keyPressListener.key))
+			if (keyPress(keyPressListener.key))
 			{
 				keyPressListener.onPress();
 			}

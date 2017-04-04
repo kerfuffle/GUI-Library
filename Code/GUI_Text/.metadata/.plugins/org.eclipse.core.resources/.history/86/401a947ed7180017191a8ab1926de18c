@@ -332,7 +332,7 @@ public abstract class DavisGUI {
 		}
 	}
 	
-	public static boolean keyStates[] = new boolean[1000];
+	public static boolean keyStates[] = new boolean[256];
 	public static boolean checkKey(int i)
 	{
 		int state = GLFW.glfwGetKey(window, i);

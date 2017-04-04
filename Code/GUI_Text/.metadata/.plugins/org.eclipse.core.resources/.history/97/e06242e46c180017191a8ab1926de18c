@@ -15,7 +15,6 @@ import net.kerfuffle.Utilities.RGB;
 import net.kerfuffle.Utilities.Text;
 import net.kerfuffle.Utilities.Triangle;
 import net.kerfuffle.Utilities.DavisImage;
-import net.kerfuffle.Utilities.KeyPressListener;
 import net.kerfuffle.Utilities.OnClickListener;
 
 import java.io.IOException;
@@ -36,7 +35,11 @@ public class HelloWorld extends DavisGUI{
 	public static final int WIDTH = 1000, HEIGHT = 700;
 	
 	private Player p;
-	private Button leftArrow, rightArrow;
+	private Polygon poly;
+	private Triangle tri;
+	
+	private Button butt;
+	private Button triButt;
 	
 	public HelloWorld()
 	{
@@ -55,54 +58,27 @@ public class HelloWorld extends DavisGUI{
 		p.setZoomSpeed(1.01f);
 		p.setTexture("res/A.png");
 		
+		tri = new Triangle(-300, -300, new RGB(1,0,1));
+		tri.setRelativeVertex(0, 0, 0);
+		tri.setRelativeVertex(1, 0, 100);
+		tri.setRelativeVertex(2, -50, 50);
 		
-		Triangle leftTri = new Triangle(-400, -300, new RGB(1,0,1));
-		leftTri.setRelativeVertex(0, 0, 0);
-		leftTri.setRelativeVertex(1, 0, 100);
-		leftTri.setRelativeVertex(2, -50, 50);
-		
-		leftArrow = new Button(leftTri);
-		leftArrow.setOnClickListener(new OnClickListener()
+		triButt = new Button(tri);
+		triButt.setOnClickListener(new OnClickListener()
 		{
 			public void onClick() 
 			{
-				System.out.println("left triggered");
-			}
-		});
-		leftArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_LEFT){
-			public void onPress()
-			{
-				leftArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
+				System.out.println("triggered");
 			}
 		});
 		
-		Triangle rightTri = new Triangle(400, -300, new RGB(1,0,1));
-		rightTri.setRelativeVertex(0, 0, 0);
-		rightTri.setRelativeVertex(1, 0, 100);
-		rightTri.setRelativeVertex(2, 50, 50);
-		
-		rightArrow = new Button(rightTri);
-		rightArrow.setOnClickListener(new OnClickListener()
-		{
-			public void onClick() 
-			{
-				System.out.println("right triggered");
-			}
-		});
-		rightArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_RIGHT){
-			public void onPress()
-			{
-				rightArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
-			}
-		});
 		
 	}
 	
 	public void childLoop() 
 	{
 		
-		leftArrow.update();
-		rightArrow.update();
+		triButt.update();
 		
 		p.update();
 	}

@@ -15,7 +15,6 @@ import net.kerfuffle.Utilities.RGB;
 import net.kerfuffle.Utilities.Text;
 import net.kerfuffle.Utilities.Triangle;
 import net.kerfuffle.Utilities.DavisImage;
-import net.kerfuffle.Utilities.KeyPressListener;
 import net.kerfuffle.Utilities.OnClickListener;
 
 import java.io.IOException;
@@ -69,12 +68,6 @@ public class HelloWorld extends DavisGUI{
 				System.out.println("left triggered");
 			}
 		});
-		leftArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_LEFT){
-			public void onPress()
-			{
-				leftArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
-			}
-		});
 		
 		Triangle rightTri = new Triangle(400, -300, new RGB(1,0,1));
 		rightTri.setRelativeVertex(0, 0, 0);
@@ -87,12 +80,6 @@ public class HelloWorld extends DavisGUI{
 			public void onClick() 
 			{
 				System.out.println("right triggered");
-			}
-		});
-		rightArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_RIGHT){
-			public void onPress()
-			{
-				rightArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
 			}
 		});
 		

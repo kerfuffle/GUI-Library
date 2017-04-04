@@ -7,7 +7,6 @@ public class Button {
 	private Triangle triangle;
 	private Quad quad;
 	private OnClickListener onClickListener;
-	private KeyPressListener keyPressListener;
 	
 	public Button(Quad quad)
 	{
@@ -27,18 +26,6 @@ public class Button {
 	{
 		return quad;
 	}
-	public void setColor(RGB color)
-	{
-		if (quad != null)
-		{
-			quad.setColor(color);
-		}
-		
-		if (triangle != null)
-		{
-			triangle.setColor(color);
-		}
-	}
 	public void setTexture(String path)
 	{
 		quad.setTexture(path);
@@ -48,10 +35,7 @@ public class Button {
 	{
 		onClickListener = ocl;
 	}
-	public void setKeyPressListener(KeyPressListener kpl)
-	{
-		keyPressListener = kpl;
-	}
+	
 	
 	public void update()
 	{
@@ -59,7 +43,11 @@ public class Button {
 		{	
 			Quad bounds = getTriangleBounds(triangle);
 			
-			if (isClick(bounds.x, bounds.y, bounds.w, bounds.h) && onClickListener != null)
+			//System.out.printf("%f, %f, %f, %f\n", bounds.x,bounds.y,bounds.w,bounds.h);// + " : " + triangle.getX());
+			//bounds.setColor(new RGB(1,1,1));
+			//bounds.draw();
+			
+			if (isClick(bounds.x, bounds.y, bounds.w, bounds.h))
 			{
 				onClickListener.onClick();
 			}
@@ -67,19 +55,11 @@ public class Button {
 		}
 		if (quad != null)
 		{
-			if (isClick(quad.x, quad.y, quad.w, quad.h) && onClickListener != null)
+			if (isClick(quad.x, quad.y, quad.w, quad.h))
 			{
 				onClickListener.onClick();
 			}
 			quad.draw();
-		}
-		
-		if (keyPressListener != null)
-		{
-			if (checkKey(keyPressListener.key))
-			{
-				keyPressListener.onPress();
-			}
 		}
 	}
 }
