@@ -23,7 +23,6 @@
 <fullyQualifiedTypeName name="org.lwjgl.BufferUtils"/>
 <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWErrorCallback"/>
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GLUtil"/>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL"/>
 <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWVidMode"/>
 <fullyQualifiedTypeName name="java.awt.Image"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.DavisImage"/>
@@ -34,4 +33,9 @@
 <fullyQualifiedTypeName name="java.nio.DoubleBuffer"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.Button"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.OnClickListener"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
+<fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+<fullyQualifiedTypeName name="javax.swing.Renderer"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.GUI.Color"/>
 </qualifiedTypeNameHistroy>

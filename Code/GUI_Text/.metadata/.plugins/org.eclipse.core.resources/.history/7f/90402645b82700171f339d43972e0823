@@ -1,0 +1,43 @@
+package net.kerfuffle.Utilities;
+
+import static java.awt.Font.*;
+
+import java.awt.image.BufferedImage;
+
+import javax.swing.Renderer;
+
+public class Text {
+
+	private String text;
+	private int fontHeight = 0;
+	private boolean antiAlias = true;
+	
+	java.awt.Font font = new java.awt.Font(MONOSPACED, PLAIN, 16);
+	
+	public Text(String text)
+	{
+		this.text=text;
+		
+		int imageWidth = 0;
+		int imageHeight = 0;
+
+		for (int i = 32; i < 256; i++) {
+		    if (i == 127) {
+		        continue;
+		    }
+		    char c = (char) i;
+		    BufferedImage ch = createCharImage(font, c, antiAlias);
+
+		    imageWidth += ch.getWidth();
+		    imageHeight = Math.max(imageHeight, ch.getHeight());
+		}
+
+		fontHeight = imageHeight;
+		
+		
+		
+	}
+	
+	
+	
+}

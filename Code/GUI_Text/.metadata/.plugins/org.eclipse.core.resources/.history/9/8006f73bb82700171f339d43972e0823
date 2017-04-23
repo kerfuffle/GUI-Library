@@ -1,0 +1,18 @@
+package net.kerfuffle.Utilities;
+
+import java.awt.Font.*;
+
+public class Text {
+
+	private String text;
+	
+	java.awt.Font font = new java.awt.Font(MONOSPACED, PLAIN, 16);
+	
+	public Text(String text)
+	{
+		this.text=text;
+	}
+	
+	
+	
+}
