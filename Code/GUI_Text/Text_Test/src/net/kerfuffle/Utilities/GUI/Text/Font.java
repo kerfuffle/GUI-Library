@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.lwjgl.system.MemoryUtil;
 
-import net.kerfuffle.Utilities.GUI.Color;
-import net.kerfuffle.Utilities.GUI.Texture;
+import net.kerfuffle.Utilities.GUI.DavisGUI;
+import net.kerfuffle.Utilities.GUI.RGB;
 
 import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.PLAIN;
@@ -370,7 +370,7 @@ public class Font {
      * @param y        Y coordinate of the text position
      * @param c        Color to use
      */
-    public void drawText(Renderer renderer, CharSequence text, float x, float y, Color c) {
+    public void drawText(CharSequence text, float x, float y, RGB c) {
         int textHeight = getHeight(text);
 
         float drawX = x;
@@ -380,7 +380,6 @@ public class Font {
         }
 
         texture.bind();
-        renderer.begin();
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
             if (ch == '\n') {
@@ -394,10 +393,10 @@ public class Font {
                 continue;
             }
             Glyph g = glyphs.get(ch);
-            renderer.drawTextureRegion(texture, drawX, drawY, g.x, g.y, g.width, g.height, c);
+            DavisGUI.drawTextureRegion(texture, drawX, drawY, g.x, g.y, g.width, g.height, c);
+            //renderer.drawTextureRegion(texture, drawX, drawY, g.x, g.y, g.width, g.height, c);
             drawX += g.width;
         }
-        renderer.end();
     }
 
     /**
@@ -408,8 +407,8 @@ public class Font {
      * @param x        X coordinate of the text position
      * @param y        Y coordinate of the text position
      */
-    public void drawText(Renderer renderer, CharSequence text, float x, float y) {
-        drawText(renderer, text, x, y, Color.WHITE);
+    public void drawText(CharSequence text, float x, float y) {
+        drawText(text, x, y, new RGB(1,1,1));
     }
 
     /**

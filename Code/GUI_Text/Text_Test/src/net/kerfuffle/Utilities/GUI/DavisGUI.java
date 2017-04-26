@@ -36,10 +36,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
-
-import net.kerfuffle.Utilities.GUI.Text.Renderer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Version;
@@ -52,8 +51,14 @@ import org.lwjgl.system.MemoryStack;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 import de.matthiasmann.twl.utils.PNGDecoder.Format;
+import net.kerfuffle.Utilities.GUI.Text.Texture;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
+import static org.lwjgl.opengl.GL15.glBindBuffer;
+import static org.lwjgl.opengl.GL15.glBufferData;
+import static org.lwjgl.opengl.GL15.glGenBuffers;
 import static org.lwjgl.stb.STBEasyFont.stb_easy_font_print;
 
 
@@ -65,14 +70,11 @@ public abstract class DavisGUI {
 
 	protected String windowName;
 	protected static int windowWidth;
-
 	protected static int windowHeight;
 	public static float aspectRatio;
 	public static float scale = 1;
 	
 	public static float originX = 0, originY = 0;
-	
-	protected Renderer renderer;
 	
 	
 	public DavisGUI(String windowName, float windowWidth, float windowHeight)
@@ -82,8 +84,6 @@ public abstract class DavisGUI {
 		this.windowHeight = (int) windowHeight;
 		
 		aspectRatio = windowHeight/windowWidth;
-		
-		renderer = new Renderer();
 		
 		//System.out.print(aspectRatio);
 	}
@@ -167,8 +167,6 @@ public abstract class DavisGUI {
 		glLoadIdentity();
 		glEnable(GL_DEPTH_TEST);
 		glOrtho(-windowWidth/2, windowWidth/2, -windowHeight/2, windowHeight/2, 0, 100);
-		
-		renderer.init();
 		
 		childInit();
 		
@@ -395,6 +393,53 @@ public abstract class DavisGUI {
 		return false;
 	}
 	
+	public static void drawTextureRegion(Texture texture, float x, float y, float tx, float ty, float tw, float th, RGB c)
+	{
+		
+		float s1 = tx / texture.getWidth();
+        float t1 = ty / texture.getHeight();
+        float s2 = (tx + tw) / texture.getWidth();
+        float t2 = (ty + th) / texture.getHeight();
+		
+		color(c);
+		quadTex(x, y, tw, th, s1, t1, s2, t2, texture);
+		//quadTex(x,y,100,100,texture);
+	}
+	
+	public static void quadTex(float x, float y, float w, float h, float t1x, float t1y, float t2x, float t2y, Texture tex)
+	{
+		//tex.bind();
+		glEnable(GL_TEXTURE_2D);
+		glBegin(GL_QUADS);
+		glTexCoord2f(t1x, t1y);
+		glVertex2f(x, y);
+		glTexCoord2f(t1x, t2y);
+		glVertex2f(x, y + h);
+		glTexCoord2f(t2x, t2y);	
+		glVertex2f(x + w, y + h);
+		glTexCoord2f(t2x, t1y); 
+		glVertex2f(x + w, y);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+	}
+	
+	public static void quadTex(float x, float y, float w, float h, Texture tex)
+	{
+		tex.bind();
+		glEnable(GL_TEXTURE_2D);
+		glBegin(GL_QUADS);
+		glTexCoord2f(1, 1);		
+		glVertex2f(x, y);
+		glTexCoord2f(1, 0); 	
+		glVertex2f(x, y + h);
+		glTexCoord2f(0, 0);		
+		glVertex2f(x + w, y + h);
+		glTexCoord2f(0, 1);		
+		glVertex2f(x + w, y);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+	}
+	
 	public static void offsetScreen(float x, float y, float z)
 	{
 		originX += -x;
@@ -439,5 +484,52 @@ public abstract class DavisGUI {
 	public static void color(RGB c)
 	{
 		glColor3f(c.R(), c.G(), c.B());
+	}
+	
+	
+	public static void floatBufferExample()
+	{
+		int vertices = 3;
+
+		int vertex_size = 3; // X, Y, Z,
+		int color_size = 3; // R, G, B,
+
+		FloatBuffer vertex_data = BufferUtils.createFloatBuffer(vertices * vertex_size);
+		vertex_data.put(new float[] { -100f, -100f, 0f, });
+		vertex_data.put(new float[] { 100f, -100f, 0f, });
+		vertex_data.put(new float[] { 100f, 100f, 0f, });
+		vertex_data.flip();
+
+		FloatBuffer color_data = BufferUtils.createFloatBuffer(vertices * color_size);
+		color_data.put(new float[] { 100f, 100f, 0f, });
+		color_data.put(new float[] { 100f, 100f, 0f, });
+		color_data.put(new float[] { 100f, 100f, 0f, });
+		color_data.flip();
+
+		int vbo_vertex_handle = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, vbo_vertex_handle);
+		glBufferData(GL_ARRAY_BUFFER, vertex_data, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		int vbo_color_handle = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, vbo_color_handle);
+		glBufferData(GL_ARRAY_BUFFER, color_data, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, vbo_vertex_handle);
+		glVertexPointer(vertex_size, GL_FLOAT, 0, 0l);
+
+		glBindBuffer(GL_ARRAY_BUFFER, vbo_color_handle);
+		glColorPointer(color_size, GL_FLOAT, 0, 0l);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+
+		glDrawArrays(GL_TRIANGLES, 0, vertices);
+
+		glDisableClientState(GL_COLOR_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
+
+
 	}
 }

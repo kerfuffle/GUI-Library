@@ -7,7 +7,6 @@ import org.lwjgl.system.*;
 
 import net.kerfuffle.Utilities.GUI.Button;
 import net.kerfuffle.Utilities.GUI.Camera2D;
-import net.kerfuffle.Utilities.GUI.Color;
 import net.kerfuffle.Utilities.GUI.DavisGUI;
 import net.kerfuffle.Utilities.GUI.DavisImage;
 import net.kerfuffle.Utilities.GUI.KeyPressListener;
@@ -17,9 +16,16 @@ import net.kerfuffle.Utilities.GUI.Polygon;
 import net.kerfuffle.Utilities.GUI.Quad;
 import net.kerfuffle.Utilities.GUI.RGB;
 import net.kerfuffle.Utilities.GUI.Triangle;
+import net.kerfuffle.Utilities.GUI.Text.Font;
 
+import java.awt.FontFormatException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.Renderer;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -29,20 +35,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.stb.STBEasyFont.*;
-
+import static org.lwjgl.opengl.GL15.*;
 
 public class HelloWorld extends DavisGUI{
 
 	public static final int WIDTH = 1000, HEIGHT = 700;
-	
+
 	private Player p;
 	private Button leftArrow, rightArrow;
 	
+	private Font font;
+
 	public HelloWorld()
 	{
 		super("Hey", WIDTH, HEIGHT);
 	}
-	
+
 	public static void main(String args[]) throws IOException
 	{
 		new HelloWorld().run();
@@ -54,13 +62,13 @@ public class HelloWorld extends DavisGUI{
 		p.setZoomKeys(GLFW_KEY_O, GLFW_KEY_P);
 		p.setZoomSpeed(1.01f);
 		p.setTexture("res/A.png");
-		
-		
+
+
 		Triangle leftTri = new Triangle(-400, -300, new RGB(1,0,1));
 		leftTri.setRelativeVertex(0, 0, 0);
 		leftTri.setRelativeVertex(1, 0, 100);
 		leftTri.setRelativeVertex(2, -50, 50);
-		
+
 		leftArrow = new Button(leftTri);
 		leftArrow.setOnClickListener(new OnClickListener()
 		{
@@ -75,12 +83,12 @@ public class HelloWorld extends DavisGUI{
 				leftArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
 			}
 		});
-		
+
 		Triangle rightTri = new Triangle(400, -300, new RGB(1,0,1));
 		rightTri.setRelativeVertex(0, 0, 0);
 		rightTri.setRelativeVertex(1, 0, 100);
 		rightTri.setRelativeVertex(2, 50, 50);
-		
+
 		rightArrow = new Button(rightTri);
 		rightArrow.setOnClickListener(new OnClickListener()
 		{
@@ -95,23 +103,31 @@ public class HelloWorld extends DavisGUI{
 				rightArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
 			}
 		});
+
+		
+		 try {
+           font = new Font(new FileInputStream("res/Helvetica.ttf"), 72);
+       } catch (FontFormatException | IOException ex) {
+           Logger.getLogger(Renderer.class.getName()).log(Level.CONFIG, null, ex);
+           font = new Font();
+       }
 		
 	}
-	
+
 	public void childLoop() 
 	{
+
+		font.drawText("A", 0, 0);
+		font.drawText("B", 72, 0);
+		font.drawText("C", 72*2, 0);
+		font.drawText("D", 72*3, 0);
 		
-		 String scoreText = "Score";
-	        float scoreTextX = 0;
-	        float scoreTextY = 0;
-	        renderer.drawText(scoreText, scoreTextX, scoreTextY, Color.WHITE);
-		
-		
+
 		leftArrow.update();
 		rightArrow.update();
-		
+
 		p.update();
 	}
-	
-	
+
+
 }
