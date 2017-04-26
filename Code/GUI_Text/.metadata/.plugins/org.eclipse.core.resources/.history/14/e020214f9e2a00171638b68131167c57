@@ -98,8 +98,6 @@ public abstract class DavisGUI {
 		int width = gd.getDisplayMode().getWidth(); 
 		int height = gd.getDisplayMode().getHeight();
 		
-		this.windowName = windowName;
-		
 		windowWidth = width;
 		windowHeight = height;
 		

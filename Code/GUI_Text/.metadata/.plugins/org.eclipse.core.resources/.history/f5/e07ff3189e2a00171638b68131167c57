@@ -49,8 +49,7 @@ public class HelloWorld extends DavisGUI{
 
 	public HelloWorld()
 	{
-		//super("Hey", WIDTH, HEIGHT);
-		super("Hey");
+		super("Hey", WIDTH, HEIGHT, true);
 	}
 
 	public static void main(String args[]) throws IOException

@@ -98,12 +98,8 @@ public abstract class DavisGUI {
 		int width = gd.getDisplayMode().getWidth(); 
 		int height = gd.getDisplayMode().getHeight();
 		
-		this.windowName = windowName;
-		
 		windowWidth = width;
 		windowHeight = height;
-		
-		aspectRatio = windowHeight/windowWidth;
 	}
 	
 	public void run() {
@@ -133,7 +129,7 @@ public abstract class DavisGUI {
 		
 		if (fullScreen)
 		{
-			window = glfwCreateWindow(windowWidth, windowHeight, windowName, NULL, NULL);
+			window = glfwCreateWindow(width, height, windowName, glfwGetPrimaryMonitor(), NULL);
 		}
 		else
 		{

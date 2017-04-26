@@ -81,29 +81,17 @@ public abstract class DavisGUI {
 	public static float originX = 0, originY = 0;
 	
 	
-	public DavisGUI(String windowName, float windowWidth, float windowHeight)
+	public DavisGUI(String windowName, float windowWidth, float windowHeight, boolean fullScreen)
 	{
 		this.windowName = windowName;
 		this.windowWidth = (int) windowWidth;
 		this.windowHeight = (int) windowHeight;
 		
+		this.fullScreen = fullScreen;
+		
 		aspectRatio = windowHeight/windowWidth;
 		
 		//System.out.print(aspectRatio);
-	}
-	
-	public DavisGUI(String windowName)
-	{
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); 
-		int width = gd.getDisplayMode().getWidth(); 
-		int height = gd.getDisplayMode().getHeight();
-		
-		this.windowName = windowName;
-		
-		windowWidth = width;
-		windowHeight = height;
-		
-		aspectRatio = windowHeight/windowWidth;
 	}
 	
 	public void run() {
@@ -133,7 +121,10 @@ public abstract class DavisGUI {
 		
 		if (fullScreen)
 		{
-			window = glfwCreateWindow(windowWidth, windowHeight, windowName, NULL, NULL);
+			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); 
+			int width = gd.getDisplayMode().getWidth(); 
+			int height = gd.getDisplayMode().getHeight();
+			window = glfwCreateWindow(width, height, windowName, glfwGetPrimaryMonitor(), NULL);
 		}
 		else
 		{
