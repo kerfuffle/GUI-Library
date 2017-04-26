@@ -43,8 +43,9 @@ public class HelloWorld extends DavisGUI{
 
 	private Player p;
 	private Button leftArrow, rightArrow;
-	
+
 	private Font font;
+	private Letter letters[] = new Letter[126-32];
 
 	public HelloWorld()
 	{
@@ -104,24 +105,38 @@ public class HelloWorld extends DavisGUI{
 			}
 		});
 
+
+		try {
+			font = new Font(new FileInputStream("res/Helvetica.ttf"), 72);
+		} catch (FontFormatException | IOException ex) {
+			Logger.getLogger(Renderer.class.getName()).log(Level.CONFIG, null, ex);
+			font = new Font();
+		}
+
 		
-		 try {
-           font = new Font(new FileInputStream("res/Helvetica.ttf"), 72);
-       } catch (FontFormatException | IOException ex) {
-           Logger.getLogger(Renderer.class.getName()).log(Level.CONFIG, null, ex);
-           font = new Font();
-       }
+		for (int i = 32; i < 126; i++)
+		{
+			char c = (char) i;
+			letters[i-32] = new Letter(c, font, -500 + ((i-32)*72), -200);
+		}
+		
+		
 		
 	}
+	
+
+
 
 	public void childLoop() 
 	{
-
-		font.drawText("A", 0, 0);
-		font.drawText("B", 72, 0);
-		font.drawText("C", 72*2, 0);
-		font.drawText("D", 72*3, 0);
-		
+		for (int i = 0; i < letters.length; i++)
+		{
+			float x = letters[i].x;
+			float y = letters[i].y;
+			letters[i].setCoords(x-2, y);
+			letters[i].draw();
+		}
+	
 
 		leftArrow.update();
 		rightArrow.update();

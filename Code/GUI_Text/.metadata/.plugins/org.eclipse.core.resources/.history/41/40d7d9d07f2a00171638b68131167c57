@@ -1,0 +1,30 @@
+package net.kerfuffle.textTest;
+
+import net.kerfuffle.Utilities.GUI.Text.Font;
+
+public class Letter {
+
+	private char letter;
+	private Font font;
+	private float x,y;
+	
+	public Letter(char letter, Font font, float x, float y)
+	{
+		this.letter = letter;
+		this.font = font;
+		this.x=x;
+		this.y=y;
+	}
+	
+	public void setCoords(float x, float y)
+	{
+		this.x=x;
+		this.y=y;
+	}
+	
+	public void draw()
+	{
+		font.drawText(String.valueOf(letter), x, y);
+	}
+	
+}
