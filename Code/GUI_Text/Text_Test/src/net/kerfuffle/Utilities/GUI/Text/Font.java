@@ -64,6 +64,10 @@ public class Font {
      */
     private int fontHeight;
 
+    
+    private int size;
+    
+    
     /**
      * Creates a default antialiased font with monospaced glyphs and default
      * size 16.
@@ -133,6 +137,7 @@ public class Font {
      */
     public Font(InputStream in, int size, boolean antiAlias) throws FontFormatException, IOException {
         this(java.awt.Font.createFont(TRUETYPE_FONT, in).deriveFont(PLAIN, size), antiAlias);
+        this.size = size;
         
     }
 
@@ -418,4 +423,9 @@ public class Font {
         texture.delete();
     }
 
+    public int getSize()
+    {
+    	return size;
+    }
+    
 }

@@ -89,6 +89,7 @@ public abstract class DavisGUI {
 		
 		aspectRatio = windowHeight/windowWidth;
 		
+		fullScreen = false;
 		//System.out.print(aspectRatio);
 	}
 	
@@ -104,6 +105,8 @@ public abstract class DavisGUI {
 		windowHeight = height;
 		
 		aspectRatio = windowHeight/windowWidth;
+		
+		fullScreen = true;
 	}
 	
 	public void run() {
@@ -131,7 +134,7 @@ public abstract class DavisGUI {
 
 		
 		
-		if (fullScreen)
+		if (!fullScreen)
 		{
 			window = glfwCreateWindow(windowWidth, windowHeight, windowName, NULL, NULL);
 		}

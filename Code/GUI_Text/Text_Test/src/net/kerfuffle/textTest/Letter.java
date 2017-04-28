@@ -1,14 +1,14 @@
+
 package net.kerfuffle.textTest;
 
-import net.kerfuffle.Utilities.GUI.RGB;
 import net.kerfuffle.Utilities.GUI.Text.Font;
 
 public class Letter {
 
 	private char letter;
 	private Font font;
-	public float x,y;
-	private boolean visible = true;
+	public boolean visible = true;
+	public float x, y;
 	
 	public Letter(char letter, Font font, float x, float y)
 	{
@@ -18,11 +18,7 @@ public class Letter {
 		this.y=y;
 	}
 	
-	public void setCoords(float x, float y)
-	{
-		this.x=x;
-		this.y=y;
-	}
+	
 	
 	public void draw()
 	{
@@ -33,12 +29,9 @@ public class Letter {
 	}
 	
 	
-	public void setVisibility(boolean visible)
+	public char getLetter()
 	{
-		this.visible = visible;
+		return letter;
 	}
-	public boolean isVisible()
-	{
-		return visible;
-	}
+	
 }
