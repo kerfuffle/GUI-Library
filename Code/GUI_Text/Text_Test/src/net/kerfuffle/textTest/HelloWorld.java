@@ -46,11 +46,12 @@ public class HelloWorld extends DavisGUI{
 
 	private Font font;
 	private LetterSet letterSet;
+	private Quad center;
 
 	public HelloWorld()
 	{
 		//super("Hey", WIDTH, HEIGHT);
-		super("Hey",1300, 700);
+		super("Hey");
 	}
 
 	public static void main(String args[]) throws IOException
@@ -60,7 +61,8 @@ public class HelloWorld extends DavisGUI{
 
 	public void	childInit()
 	{
-		
+		center = new Quad(-50, -310, 100,100, new RGB(0,0,0));
+		center.setOuterBorder(10, 10, new RGB(1,0,0));
 		
 		p = new Player(new Quad(0-25, 0-25, 50, 50, new RGB(0,1,0)), GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, true);
 		p.setZoomKeys(GLFW_KEY_O, GLFW_KEY_P);
@@ -68,7 +70,7 @@ public class HelloWorld extends DavisGUI{
 		p.setTexture("res/A.png");
 
 
-		Triangle leftTri = new Triangle(-400, -300, new RGB(1,0,1));
+		Triangle leftTri = new Triangle(-600, -300, new RGB(1,0,1));
 		leftTri.setRelativeVertex(0, 0, 0);
 		leftTri.setRelativeVertex(1, 0, 100);
 		leftTri.setRelativeVertex(2, -50, 50);
@@ -88,7 +90,7 @@ public class HelloWorld extends DavisGUI{
 			}
 		});
 
-		Triangle rightTri = new Triangle(400, -300, new RGB(1,0,1));
+		Triangle rightTri = new Triangle(600, -300, new RGB(1,0,1));
 		rightTri.setRelativeVertex(0, 0, 0);
 		rightTri.setRelativeVertex(1, 0, 100);
 		rightTri.setRelativeVertex(2, 50, 50);
@@ -116,12 +118,12 @@ public class HelloWorld extends DavisGUI{
 			font = new Font();
 		}
 
-		letterSet = new LetterSet(font, 10, -500, 500, -300);
+		letterSet = new LetterSet(font, 9, -500, 500, -300);
 	
 	}
 	
 
-
+	private boolean caps = false;
 
 	public void childLoop() 
 	{
@@ -135,12 +137,18 @@ public class HelloWorld extends DavisGUI{
 		{
 			letterSet.shiftRight();
 		}
+		if (checkKey(GLFW.GLFW_KEY_CAPS_LOCK))
+		{
+			letterSet.setSet(LetterSet.UPPER);
+		}
+		
+		
 	
 		letterSet.draw();
 
 		leftArrow.update();
 		rightArrow.update();
-
+		center.draw();
 		p.update();
 	}
 

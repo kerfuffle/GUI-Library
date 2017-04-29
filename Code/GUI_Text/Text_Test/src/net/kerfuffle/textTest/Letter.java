@@ -34,4 +34,8 @@ public class Letter {
 		return letter;
 	}
 	
+	public void toUpperCase()
+	{
+		letter = Character.toUpperCase(letter);
+	}
 }

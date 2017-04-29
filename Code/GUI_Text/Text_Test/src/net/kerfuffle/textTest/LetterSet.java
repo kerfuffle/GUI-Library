@@ -1,5 +1,7 @@
 package net.kerfuffle.textTest;
 
+import java.util.Arrays;
+
 import net.kerfuffle.Utilities.GUI.Text.Font;
 
 public class LetterSet {
@@ -16,8 +18,6 @@ public class LetterSet {
 	private Font font;
 	private float y, leftBoundX, rightBoundX;
 	private int amountVisible;
-	private int currentLength = 26;
-	private int visibleIndex[];
 	
 	public LetterSet(Font font, int amountVisible, float leftBoundX, float rightBoundX, float y)
 	{
@@ -27,60 +27,50 @@ public class LetterSet {
 		this.rightBoundX = rightBoundX;
 		this.y=y;
 		
-		visibleIndex = new int[amountVisible];
-		for (int i = 0; i < visibleIndex.length; i++)
-		{
-			visibleIndex[i] = i;
-		}
-		
 		setSet(LOWER);
 	}
 	
 	public void draw()
 	{
-		for (int i = 0; i < currentSet.length; i++)
+		for (int i = 0; i < amountVisible; i++)
 		{
-			for (int j = 0; j < visibleIndex.length; j++)
-			{
-				if (i == visibleIndex[j])
-				{
-					currentSet[i].draw();
-				}
-			}
+			currentSet[i].draw();
 		}
 	}
 	
+	
 	public void shiftLeft()
 	{
-		for (int i = 0; i < visibleIndex.length; i++)
-		{
-			if (visibleIndex[i] == currentLength-1)
-			{
-				visibleIndex[i] = 0;
-				continue;
-			}
-			visibleIndex[i] += 1;
-		}
+		Letter temp[] = Arrays.copyOf(currentSet, currentSet.length);
 		
 		for (int i = 0; i < currentSet.length; i++)
 		{
-			currentSet[i].x -= spaceBetween();
+			if (i == currentSet.length-1)
+			{
+				currentSet[i] = temp[0];
+				currentSet[i].x = leftBoundX+font.getWidth("g") + ((currentSet.length-1) * spaceBetween());
+				continue;
+			}
+			
+			currentSet[i] = temp[i+1];
+			currentSet[i].x = leftBoundX+font.getWidth("g") + ((i) * spaceBetween());
 		}
 	}
 	public void shiftRight()
 	{
-		for (int i = 0; i < visibleIndex.length; i++)
-		{
-			if (visibleIndex[i] == 0)
-			{
-				visibleIndex[i] = currentLength-1;
-				continue;
-			}
-			visibleIndex[i] -= 1;
-		}
+		Letter temp[] = Arrays.copyOf(currentSet, currentSet.length);
+		
 		for (int i = 0; i < currentSet.length; i++)
 		{
-			currentSet[i].x += spaceBetween();
+			if (i == 0)
+			{
+				currentSet[i] = temp[currentSet.length-1];
+				currentSet[i].x = leftBoundX+font.getWidth("g") + ((0) * spaceBetween());
+				continue;
+			}
+			
+			currentSet[i] = temp[i-1];
+			currentSet[i].x = leftBoundX+font.getWidth("g") + ((i) * spaceBetween());
 		}
 	}
 	
@@ -104,10 +94,9 @@ public class LetterSet {
 		}
 		if (set == UPPER)
 		{
-			currentSet = new Letter[upper.length];
-			for (int i = 0; i < upper.length; i++)
+			for (Letter l : currentSet)
 			{
-				currentSet[i] = new Letter(upper[i], font, (leftBoundX+font.getWidth("G")) + (i * spaceBetween()), y);
+				l.toUpperCase();
 			}
 		}
 	}
