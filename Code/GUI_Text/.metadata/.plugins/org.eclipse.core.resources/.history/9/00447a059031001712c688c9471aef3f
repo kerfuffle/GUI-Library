@@ -1,0 +1,40 @@
+package net.kerfuffle.textTest;
+
+import net.kerfuffle.Utilities.GUI.Text.Font;
+
+public class WordSet {
+
+	private StringBuilder sentence;
+	private Font font;
+	
+	public WordSet(Font font)
+	{
+		sentence = new StringBuilder();
+		this.font = font;
+	}
+	
+	public void addLetter(char c)
+	{
+		if (font.getWidth(sentence.toString()) > 1300)
+		{
+			sentence.append("\n");
+		}
+		sentence.append(c);
+	}
+	public void removeLastLetter()
+	{
+		if (sentence.length() > 0)
+		{
+			sentence.deleteCharAt(sentence.length()-1);
+		}
+	}
+	public void addSpace()
+	{
+		sentence.append(" ");
+	}
+
+	public void draw()
+	{
+		font.drawText(sentence.toString(), -1300/2, 200);
+	}
+}

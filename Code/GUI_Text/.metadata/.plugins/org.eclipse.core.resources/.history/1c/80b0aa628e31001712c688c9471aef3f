@@ -1,0 +1,29 @@
+package net.kerfuffle.textTest;
+
+import net.kerfuffle.Utilities.GUI.Text.Font;
+
+public class WordSet {
+
+	private StringBuilder sentence;
+	private Font font;
+	
+	public WordSet(Font font)
+	{
+		sentence = new StringBuilder();
+		this.font = font;
+	}
+	
+	public void addLetter(char c)
+	{
+		sentence.append(c);
+	}
+	public void removeLastLetter()
+	{
+		sentence.deleteCharAt(sentence.length()-1);
+	}
+
+	public void draw()
+	{
+		font.drawText(sentence.toString(), -1300, 200);
+	}
+}

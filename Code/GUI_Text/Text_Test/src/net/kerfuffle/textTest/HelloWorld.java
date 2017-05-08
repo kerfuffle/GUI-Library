@@ -44,8 +44,9 @@ public class HelloWorld extends DavisGUI{
 	private Player p;
 	private Button leftArrow, rightArrow;
 
-	private Font font;
+	private Font letter_font, letter_select_font, word_font;
 	private LetterSet letterSet;
+	private WordSet wordSet;
 	private Quad center;
 
 	public HelloWorld()
@@ -64,10 +65,10 @@ public class HelloWorld extends DavisGUI{
 		center = new Quad(-50, -310, 100,100, new RGB(0,0,0));
 		center.setOuterBorder(10, 10, new RGB(1,0,0));
 		
-		p = new Player(new Quad(0-25, 0-25, 50, 50, new RGB(0,1,0)), GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, true);
+		p = new Player(new Quad(0-0.5f, 0-0.5f, 1, 1, new RGB(0,1,0)), GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, true);
 		p.setZoomKeys(GLFW_KEY_O, GLFW_KEY_P);
 		p.setZoomSpeed(1.01f);
-		p.setTexture("res/A.png");
+		//p.setTexture("res/A.png");
 
 
 		Triangle leftTri = new Triangle(-600, -300, new RGB(1,0,1));
@@ -112,13 +113,16 @@ public class HelloWorld extends DavisGUI{
 
 
 		try {
-			font = new Font(new FileInputStream("res/Helvetica.ttf"), 72);
+			letter_font = new Font(new FileInputStream("res/Helvetica.ttf"), 72);
+			letter_select_font = new Font(new FileInputStream("res/Helvetica.ttf"), 92);
+			word_font = new Font(new FileInputStream("res/Helvetica.ttf"), 56);
 		} catch (FontFormatException | IOException ex) {
 			Logger.getLogger(Renderer.class.getName()).log(Level.CONFIG, null, ex);
-			font = new Font();
+			letter_font = new Font();
 		}
 
-		letterSet = new LetterSet(font, 9, -500, 500, -300);
+		letterSet = new LetterSet(letter_font, letter_select_font, 9, -500, 500, -300);
+		wordSet = new WordSet(word_font);
 	
 	}
 	
@@ -141,10 +145,23 @@ public class HelloWorld extends DavisGUI{
 		{
 			letterSet.setSet(LetterSet.UPPER);
 		}
+		if (checkKey(GLFW.GLFW_KEY_ENTER))
+		{
+			wordSet.addLetter(letterSet.getCurrentLetter());
+		}
+		if (checkKey(GLFW.GLFW_KEY_BACKSPACE))
+		{
+			wordSet.removeLastLetter();
+		}
+		if (checkKey(GLFW.GLFW_KEY_SPACE))
+		{
+			wordSet.addSpace();
+		}
 		
 		
 	
 		letterSet.draw();
+		wordSet.draw();
 
 		leftArrow.update();
 		rightArrow.update();

@@ -38,11 +38,11 @@
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.GUI.Color"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.GUI.RGB"/>
 <fullyQualifiedTypeName name="net.kerfuffle.Utilities.GUI.DavisGUI"/>
-<fullyQualifiedTypeName name="net.kerfuffle.Utilities.GUI.Text.Font"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="java.awt.FontFormatException"/>
 <fullyQualifiedTypeName name="java.util.logging.Level"/>
 <fullyQualifiedTypeName name="javax.swing.Renderer"/>
 <fullyQualifiedTypeName name="java.util.logging.Logger"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="net.kerfuffle.Utilities.GUI.Text.Font"/>
 </qualifiedTypeNameHistroy>

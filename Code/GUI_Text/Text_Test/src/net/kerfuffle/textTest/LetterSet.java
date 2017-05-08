@@ -16,18 +16,35 @@ public class LetterSet {
 	public Letter currentSet[] = new Letter[26];
 	
 	private Font font;
+	private Font letter_select_font;
 	private float y, leftBoundX, rightBoundX;
 	private int amountVisible;
 	
-	public LetterSet(Font font, int amountVisible, float leftBoundX, float rightBoundX, float y)
+	public LetterSet(Font font, Font letter_select_font, int amountVisible, float leftBoundX, float rightBoundX, float y)
 	{
 		this.font = font;
 		this.amountVisible = amountVisible;
 		this.leftBoundX = leftBoundX; 
 		this.rightBoundX = rightBoundX;
 		this.y=y;
+		this.letter_select_font=letter_select_font;
 		
 		setSet(LOWER);
+	}
+	
+	public char getCurrentLetter()
+	{
+		int index = amountVisible/2;
+		Letter current = currentSet[index];
+		return current.getLetter();
+	}
+	
+	private void drawCurrentLetter()
+	{
+		int index = amountVisible/2;
+		Letter current = currentSet[index];
+		Letter drawing = new Letter(current.getLetter(), letter_select_font, 0-font.getWidth(String.valueOf(current.getLetter()))/2, current.y + 150);
+		drawing.draw();
 	}
 	
 	public void draw()
@@ -36,6 +53,7 @@ public class LetterSet {
 		{
 			currentSet[i].draw();
 		}
+		drawCurrentLetter();
 	}
 	
 	
