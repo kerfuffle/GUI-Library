@@ -516,7 +516,9 @@ public abstract class DavisGUI {
 	{
 		glBegin(GL_LINES);
 		glVertex2f(x,y);
+		glVertex2f(x, y2);
 		glVertex2f(x2, y2);
+		glVertex2f(x2, y);
 		glEnd();
 	}
 	

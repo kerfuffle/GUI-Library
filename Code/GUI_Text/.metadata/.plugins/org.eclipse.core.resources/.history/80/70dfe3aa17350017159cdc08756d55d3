@@ -124,7 +124,7 @@ public class HelloWorld extends DavisGUI{
 
 		letterSet = new LetterSet(letter_font, letter_select_font, 9, -500, 500, -300);
 		wordSet = new WordSet(word_font);
-		sentenceHistory = new SentenceHistory(word_font);
+		sentenceHistory = new SentenceHistory();
 	
 	}
 	
@@ -159,11 +159,8 @@ public class HelloWorld extends DavisGUI{
 		{
 			wordSet.addSpace();
 		}
-		if (checkKey(GLFW.GLFW_KEY_MINUS))
-		{
-			sentenceHistory.addSentence(wordSet.toString());
-			wordSet.clear();
-		}
+		
+		lineH(0, 0, 500);
 	
 		letterSet.draw();
 		wordSet.draw();

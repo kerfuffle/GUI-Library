@@ -162,7 +162,6 @@ public class HelloWorld extends DavisGUI{
 		if (checkKey(GLFW.GLFW_KEY_MINUS))
 		{
 			sentenceHistory.addSentence(wordSet.toString());
-			wordSet.clear();
 		}
 	
 		letterSet.draw();

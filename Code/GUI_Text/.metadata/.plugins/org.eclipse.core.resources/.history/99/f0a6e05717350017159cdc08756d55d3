@@ -47,7 +47,6 @@ public class HelloWorld extends DavisGUI{
 	private Font letter_font, letter_select_font, word_font;
 	private LetterSet letterSet;
 	private WordSet wordSet;
-	private SentenceHistory sentenceHistory;
 	private Quad center;
 
 	public HelloWorld()
@@ -124,7 +123,6 @@ public class HelloWorld extends DavisGUI{
 
 		letterSet = new LetterSet(letter_font, letter_select_font, 9, -500, 500, -300);
 		wordSet = new WordSet(word_font);
-		sentenceHistory = new SentenceHistory(word_font);
 	
 	}
 	
@@ -159,16 +157,12 @@ public class HelloWorld extends DavisGUI{
 		{
 			wordSet.addSpace();
 		}
-		if (checkKey(GLFW.GLFW_KEY_MINUS))
-		{
-			sentenceHistory.addSentence(wordSet.toString());
-			wordSet.clear();
-		}
+		
+		
 	
 		letterSet.draw();
 		wordSet.draw();
-		sentenceHistory.draw(windowWidth);
-		
+
 		leftArrow.update();
 		rightArrow.update();
 		center.draw();

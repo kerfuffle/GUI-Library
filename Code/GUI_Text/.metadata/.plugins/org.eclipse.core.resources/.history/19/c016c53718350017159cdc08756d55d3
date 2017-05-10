@@ -1,0 +1,17 @@
+package net.kerfuffle.textTest;
+
+import static net.kerfuffle.Utilities.GUI.DavisGUI.*;
+
+import net.kerfuffle.Utilities.GUI.RGB;
+
+public class SentenceHistory {
+
+	
+	
+	public void draw(int windowWidth)
+	{
+		color(new RGB(0,1,0));
+		lineH(-windowWidth/2, 200, windowWidth);
+	}
+	
+}

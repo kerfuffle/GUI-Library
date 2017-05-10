@@ -52,23 +52,15 @@ public class WordSet {
 	{
 		if (sentence.length() > 0)
 		{
-			if (sentence.length() > 1)
+			if (sentence.charAt(sentence.length()-2) == '\n')
 			{
-				if (sentence.charAt(sentence.length()-2) == '\n')
-				{
-					sentence.deleteCharAt(sentence.length()-1);
-					sentence.deleteCharAt(sentence.length()-1);
-				}
-				else
-				{
-					sentence.deleteCharAt(sentence.length()-1);
-				}
+				sentence.deleteCharAt(sentence.length()-1);
+				sentence.deleteCharAt(sentence.length()-1);
 			}
 			else
 			{
 				sentence.deleteCharAt(sentence.length()-1);
 			}
-			
 			
 			if (limitReached)
 			{
@@ -82,11 +74,6 @@ public class WordSet {
 		{
 			sentence.append(" ");
 		}
-	}
-	
-	public void clear()
-	{
-		sentence.delete(0, sentence.length());
 	}
 
 	public void draw()

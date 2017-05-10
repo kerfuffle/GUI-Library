@@ -83,11 +83,6 @@ public class WordSet {
 			sentence.append(" ");
 		}
 	}
-	
-	public void clear()
-	{
-		sentence.delete(0, sentence.length());
-	}
 
 	public void draw()
 	{
