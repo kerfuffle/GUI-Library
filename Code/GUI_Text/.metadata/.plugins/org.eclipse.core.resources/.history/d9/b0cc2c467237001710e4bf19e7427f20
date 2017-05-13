@@ -512,6 +512,22 @@ public abstract class DavisGUI {
 		glColor3f(c.R(), c.G(), c.B());
 	}
 	
+	public static void line(float x, float y, float x2, float y2)
+	{
+		glBegin(GL_LINES);
+		glVertex2f(x,y);
+		glVertex2f(x2, y2);
+		glEnd();
+	}
+	
+	public static void lineH(float x, float y, float length)
+	{
+		line(x, y, x+length, y);
+	}
+	public static void lineV(float x, float y, float length)
+	{
+		line(x,y,x,y+length);
+	}
 	
 	public static void floatBufferExample()
 	{

@@ -108,6 +108,15 @@ public abstract class DavisGUI {
 		
 		fullScreen = true;
 	}
+	public void setScreenSize(int windowWidth, int windowHeight)
+	{
+		this.windowWidth = windowWidth;
+		this.windowHeight = windowHeight;
+		
+		aspectRatio = windowHeight/windowWidth;
+		
+		fullScreen = false;
+	}
 	
 	public void run() {
 
