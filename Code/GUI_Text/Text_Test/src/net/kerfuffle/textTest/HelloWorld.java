@@ -49,11 +49,16 @@ public class HelloWorld extends DavisGUI{
 	private WordSet wordSet;
 	private SentenceHistory sentenceHistory;
 	private Quad center;
+	
+	
+	private History history;
+	private Font histFont;
+	
 
 	public HelloWorld()
 	{
 		//super("Hey", WIDTH, HEIGHT);
-		super("Hey");
+		super("Hey", 300, 500);
 	}
 
 	public static void main(String args[]) throws IOException
@@ -63,68 +68,84 @@ public class HelloWorld extends DavisGUI{
 
 	public void	childInit()
 	{
-		center = new Quad(-50, -310, 100,100, new RGB(0,0,0));
-		center.setOuterBorder(10, 10, new RGB(1,0,0));
 		
-		p = new Player(new Quad(0-0.5f, 0-0.5f, 1, 1, new RGB(0,1,0)), GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, true);
-		p.setZoomKeys(GLFW_KEY_O, GLFW_KEY_P);
-		p.setZoomSpeed(1.01f);
+		
+//		p = new Player(new Quad(0-0.5f, 0-0.5f, 1, 1, new RGB(0,1,0)), GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, true);
+//		p.setZoomKeys(GLFW_KEY_O, GLFW_KEY_P);
+//		p.setZoomSpeed(1.01f);
+		
+		try
+		{
+			histFont = new Font(new FileInputStream("res/Helvetica.ttf"), 18);
+		}
+		catch (FontFormatException | IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		history = new History(histFont, windowWidth, windowHeight);
+		
+		history.addSentence("heyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyhey");
+		history.addSentence("hello");
+		
 		//p.setTexture("res/A.png");
 
-
-		Triangle leftTri = new Triangle(-600, -300, new RGB(1,0,1));
-		leftTri.setRelativeVertex(0, 0, 0);
-		leftTri.setRelativeVertex(1, 0, 100);
-		leftTri.setRelativeVertex(2, -50, 50);
-
-		leftArrow = new Button(leftTri);
-		leftArrow.setOnClickListener(new OnClickListener()
-		{
-			public void onClick() 
-			{
-				System.out.println("left triggered");
-			}
-		});
-		leftArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_LEFT){
-			public void onPress()
-			{
-				leftArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
-			}
-		});
-
-		Triangle rightTri = new Triangle(600, -300, new RGB(1,0,1));
-		rightTri.setRelativeVertex(0, 0, 0);
-		rightTri.setRelativeVertex(1, 0, 100);
-		rightTri.setRelativeVertex(2, 50, 50);
-
-		rightArrow = new Button(rightTri);
-		rightArrow.setOnClickListener(new OnClickListener()
-		{
-			public void onClick() 
-			{
-				System.out.println("right triggered");
-			}
-		});
-		rightArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_RIGHT){
-			public void onPress()
-			{
-				rightArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
-			}
-		});
-
-
-		try {
-			letter_font = new Font(new FileInputStream("res/Helvetica.ttf"), 72);
-			letter_select_font = new Font(new FileInputStream("res/Helvetica.ttf"), 92);
-			word_font = new Font(new FileInputStream("res/Helvetica.ttf"), 56);
-		} catch (FontFormatException | IOException ex) {
-			Logger.getLogger(Renderer.class.getName()).log(Level.CONFIG, null, ex);
-			letter_font = new Font();
-		}
-
-		letterSet = new LetterSet(letter_font, letter_select_font, 9, -500, 500, -300);
-		wordSet = new WordSet(word_font);
-		sentenceHistory = new SentenceHistory(word_font);
+//		center = new Quad(-50, -310, 100,100, new RGB(0,0,0));
+//		center.setOuterBorder(10, 10, new RGB(1,0,0));
+//
+//		Triangle leftTri = new Triangle(-600, -300, new RGB(1,0,1));
+//		leftTri.setRelativeVertex(0, 0, 0);
+//		leftTri.setRelativeVertex(1, 0, 100);
+//		leftTri.setRelativeVertex(2, -50, 50);
+//
+//		leftArrow = new Button(leftTri);
+//		leftArrow.setOnClickListener(new OnClickListener()
+//		{
+//			public void onClick() 
+//			{
+//				System.out.println("left triggered");
+//			}
+//		});
+//		leftArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_LEFT){
+//			public void onPress()
+//			{
+//				leftArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
+//			}
+//		});
+//
+//		Triangle rightTri = new Triangle(600, -300, new RGB(1,0,1));
+//		rightTri.setRelativeVertex(0, 0, 0);
+//		rightTri.setRelativeVertex(1, 0, 100);
+//		rightTri.setRelativeVertex(2, 50, 50);
+//
+//		rightArrow = new Button(rightTri);
+//		rightArrow.setOnClickListener(new OnClickListener()
+//		{
+//			public void onClick() 
+//			{
+//				System.out.println("right triggered");
+//			}
+//		});
+//		rightArrow.setKeyPressListener(new KeyPressListener(GLFW.GLFW_KEY_RIGHT){
+//			public void onPress()
+//			{
+//				rightArrow.setColor(new RGB((float)Math.random(), (float)Math.random(), (float)Math.random()));
+//			}
+//		});
+//
+//
+////		try {
+////			letter_font = new Font(new FileInputStream("res/Helvetica.ttf"), 72);
+////			letter_select_font = new Font(new FileInputStream("res/Helvetica.ttf"), 92);
+////			word_font = new Font(new FileInputStream("res/Helvetica.ttf"), 56);
+////		} catch (FontFormatException | IOException ex) {
+////			Logger.getLogger(Renderer.class.getName()).log(Level.CONFIG, null, ex);
+////			letter_font = new Font();
+////		}
+////
+////		letterSet = new LetterSet(letter_font, letter_select_font, 9, -500, 500, -300);
+////		wordSet = new WordSet(word_font);
+////		sentenceHistory = new SentenceHistory(word_font);
 	
 	}
 	
@@ -134,45 +155,56 @@ public class HelloWorld extends DavisGUI{
 	public void childLoop() 
 	{
 		
+		if (checkKey(GLFW.GLFW_KEY_P))
+		{
+			String str = "start ";
+			for (int i = 0; i < (Math.random()*50); i++)
+			{
+				str += "banana ";
+			}
+			history.addSentence(str);
+		}
 		
-		if (checkKey(GLFW.GLFW_KEY_LEFT))
-		{
-			letterSet.shiftLeft();
-		}
-		if (checkKey(GLFW.GLFW_KEY_RIGHT))
-		{
-			letterSet.shiftRight();
-		}
-		if (checkKey(GLFW.GLFW_KEY_CAPS_LOCK))
-		{
-			letterSet.setSet(LetterSet.UPPER);
-		}
-		if (checkKey(GLFW.GLFW_KEY_ENTER))
-		{
-			wordSet.addLetter(letterSet.getCurrentLetter());
-		}
-		if (checkKey(GLFW.GLFW_KEY_BACKSPACE))
-		{
-			wordSet.removeLastLetter();
-		}
-		if (checkKey(GLFW.GLFW_KEY_SPACE))
-		{
-			wordSet.addSpace();
-		}
-		if (checkKey(GLFW.GLFW_KEY_MINUS))
-		{
-			sentenceHistory.addSentence(wordSet.toString());
-			wordSet.clear();
-		}
+		history.draw();
+		
+//		if (checkKey(GLFW.GLFW_KEY_LEFT))
+//		{
+//			letterSet.shiftLeft();
+//		}
+//		if (checkKey(GLFW.GLFW_KEY_RIGHT))
+//		{
+//			letterSet.shiftRight();
+//		}
+//		if (checkKey(GLFW.GLFW_KEY_CAPS_LOCK))
+//		{
+//			letterSet.setSet(LetterSet.UPPER);
+//		}
+//		if (checkKey(GLFW.GLFW_KEY_ENTER))
+//		{
+//			wordSet.addLetter(letterSet.getCurrentLetter());
+//		}
+//		if (checkKey(GLFW.GLFW_KEY_BACKSPACE))
+//		{
+//			wordSet.removeLastLetter();
+//		}
+//		if (checkKey(GLFW.GLFW_KEY_SPACE))
+//		{
+//			wordSet.addSpace();
+//		}
+//		if (checkKey(GLFW.GLFW_KEY_MINUS))
+//		{
+//			sentenceHistory.addSentence(wordSet.toString());
+//			wordSet.clear();
+//		}
 	
-		letterSet.draw();
-		wordSet.draw();
-		sentenceHistory.draw(windowWidth);
-		
-		leftArrow.update();
-		rightArrow.update();
-		center.draw();
-		p.update();
+//		letterSet.draw();
+//		wordSet.draw();
+//		sentenceHistory.draw(windowWidth);
+//		
+//		leftArrow.update();
+//		rightArrow.update();
+//		center.draw();
+//		p.update();
 	}
 
 

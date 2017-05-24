@@ -1,0 +1,67 @@
+package net.kerfuffle.textTest;
+
+import java.util.ArrayList;
+
+import net.kerfuffle.Utilities.GUI.Scrollable;
+import net.kerfuffle.Utilities.GUI.Text.Font;
+
+public class History {
+	
+	private StringBuilder history = new StringBuilder();
+	private Font font;
+	private Scrollable scrollable;
+	private float windowWidth;
+	
+	public History(Font font, float windowWidth, float windowHeight)
+	{
+		this.font = font;
+		scrollable = new Scrollable(-windowWidth/2+10, -windowHeight/2+50, 5, windowWidth, windowHeight);
+		this.windowWidth=windowWidth;
+	}
+	
+	public void draw()
+	{
+		scrollable.update();
+		font.drawText(history.toString(), scrollable.getX(), scrollable.getY());
+	}
+	
+	public void addSentence(String str)
+	{
+		str = removeChar(str, '\n');
+		str = addLines(str);
+		history.append(str+"\n\n");
+	}
+	
+	private String addLines(String str)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(str);
+		
+		for (int i = 0; i < sb.length(); i++)
+		{
+			
+			String s = sb.toString().substring(0, i+1);
+			System.out.println(s);
+			
+			if (font.getWidth(s) > windowWidth-20)
+			{
+				sb.insert(i, '\n');
+			}
+		}
+		return sb.toString();
+	}
+	
+	private String removeChar(String str, char c)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(str);
+		for (int i = sb.length()-1; i > 0; i--)
+		{
+			if (sb.charAt(i) == c)
+			{
+				sb.deleteCharAt(i);
+			}
+		}
+		return sb.toString();
+	}
+}
